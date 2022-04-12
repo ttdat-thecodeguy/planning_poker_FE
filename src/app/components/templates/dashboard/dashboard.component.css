@@ -1,0 +1,56 @@
+.HomeTemplate-module--first-section--1oQ-v {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+@media (max-width: 1400px) {
+.HomeTemplate-module--first-section__left--1b1DV {
+    margin: 0 auto 5.2rem;
+    max-width: 84.5rem;
+    text-align: center;
+}
+}
+@media (max-width: 1400px){
+    .HomeTemplate-module--first-section__left--1b1DV {
+        margin: 0 auto 5.2rem;
+        max-width: 84.5rem;
+        text-align: center;
+    }
+}
+.Header1-module--header1--3uqnC {
+    color: #1a2935;
+    font-size: 4.8rem;
+    font-weight: 800;
+    line-height: 1.05em;
+    margin: 0;
+    padding: 0;
+}
+
+.HomeTemplate-module--first-section__logos-list--3Nurh {
+    align-items: center;
+    column-gap: 2.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    row-gap: 2.4rem;
+}
+
+
+.Link-module--link--1-kR4 {
+    color: #3993ff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.HomeTemplate-module--first-section__logos-label--ljDYK {
+    color: #48545d;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
