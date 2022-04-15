@@ -71,3 +71,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .Button-module--button--gRJWH .Button-module--label--1ikt3 {
     padding: 0 6rem;
 }
+
+/* Dialog */
+.dialog-form{
+    display: grid;
+}
+.login-form{
+    width: 450px;
+}
+
+

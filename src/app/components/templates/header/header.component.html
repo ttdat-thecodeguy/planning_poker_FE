@@ -92,13 +92,14 @@
                 class="ButtonLink-module--button-link--2m9T6 is-clickable" type="button"><span
                     class="is-clickable">Pricing</span></button></div>
         <div class="Header-module--auth-button--3-o7N">
-            <div class="AuthButton-module--dropdown-logout--bKfzL"><button
-                    class="ButtonLink-module--button-link--2m9T6 is-clickable" style="margin-left: 20px;" type="button"><span
-                        class="is-clickable">Sign Up</span></button>
+
+            <div class="AuthButton-module--dropdown-logout--bKfzL">
+                <button class="ButtonLink-module--button-link--2m9T6 is-clickable" style="margin-left: 20px;" type="button"><span
+                        class="is-clickable" (click)="openSignupDialog()">Sign Up</span></button>
                 <div
                     class="HoritzontalSpacing-module--horitzontal-spacer--2Tj58 HoritzontalSpacing-module--horitzontal-spacer--spacing-xl--1UGVf">
                 </div><button class="ButtonLink-module--button-link--2m9T6 is-clickable" type="button"  style="margin-right: 20px;"><span
-                        class="is-clickable">Login</span></button>
+                        class="is-clickable" (click)="openLoginDialog()">Login</span></button>
             </div>
             <!-- <div class="ButtonDropdown-module--wrapper--K4LcQ"><button translate="no"
                     class="ButtonDropdown-module--button--1gBcB"><span

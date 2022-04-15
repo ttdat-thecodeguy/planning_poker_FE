@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/templates/header/header.component';
+import { HeaderComponent, LoginDialog, SignUpDialog } from './components/templates/header/header.component';
 import { DashboardComponent } from './components/templates/dashboard/dashboard.component';
 import { NewGameComponent } from './components/new-game/new-game.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
     HeaderComponent,
     DashboardComponent,
     NewGameComponent,
-  
+    LoginDialog,
+    SignUpDialog
   ],
   imports: [
     BrowserModule,
