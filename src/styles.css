@@ -14,7 +14,7 @@ body {
     min-width: 100vw;
 }
 .VerticalSpacing-module--vertical-spacer--spacing-xxl--2nH6M {
-    height: 4rem;
+    height: 8rem;
 }
 .VerticalSpacing-module--vertical-spacer--spacing-xxl-4--oAhA1 {
     height: 6.4rem;
@@ -29,7 +29,9 @@ body, html {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+header{
+    margin: 30px;
+}
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
     background-color: rgb(255 255 255);
@@ -75,9 +77,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Dialog */
 .dialog-form{
     display: grid;
-}
-.login-form{
     width: 450px;
 }
+.login-form{
+    
+}
 
+.btn-close-dialog{
+    float: right;
+    border-radius: 50%;
+    transition: all .2s linear;
+    padding: 12px 16px;
+}
 
+.btn-close-dialog:hover{
+    background-color: rgb(238, 238, 238);
+}
+
+.mat-dialog-container {
+    border-radius: 10px !important;
+}
+.mat-flat-button{
+    border-radius: 10px !important;
+}
+.dig{
+    font-size: smaller;
+    margin: 30px;
+}
+/*Deck Section*/
+
+.deck-container{
+    display: flex;
+    margin: 30px auto 0 auto;
+}

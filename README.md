@@ -7,11 +7,13 @@ Use some tools: angular
 
 mỗi người cầm 1 bộ bài 
 
-voting system
-	->Fibo
-	->T-shirts
-	->x2
+bảng voting system 1 - 1 bảng (lưu trong tương lai)
+bảng user 1 - N voting sys
+
+
+
 auth
 	->chơi như người lạ
 	->login
 	->signup
+

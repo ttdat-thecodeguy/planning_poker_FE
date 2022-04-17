@@ -1,0 +1,79 @@
+<p>game-table works!</p>
+<style>
+    /* .table-container .on-bottom {
+      height: 50px;
+      position: absolute;
+      bottom: 0;
+    } */
+  
+    
+  </style>
+  
+  <div class="timer">
+    <button>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M8 0C7.44772 0 7 0.447715 7 1C7 1.55228 7.44772 2 8 2H11V3.04938C5.94668 3.5511 2 7.81465 2 13C2 18.5228 6.47715 23 12 23C17.5228 23 22 18.5228 22 13C22 10.7668 21.268 8.70455 20.0307 7.04017L20.8284 6.24257L21.5355 6.94975C21.9261 7.34027 22.5592 7.34027 22.9497 6.94975C23.3403 6.55922 23.3403 5.92606 22.9497 5.53553L22.2426 4.82835L22.2426 4.82828L20.8284 3.41406L20.8284 3.41414L20.1213 2.70711C19.7308 2.31658 19.0976 2.31658 18.7071 2.70711C18.3166 3.09763 18.3166 3.7308 18.7071 4.12132L19.4141 4.82835L18.6822 5.56027C17.1439 4.17764 15.1744 3.26526 13 3.04938V2H16C16.5523 2 17 1.55228 17 1C17 0.447715 16.5523 0 16 0H13H11H8ZM4 13C4 8.58172 7.58172 5 12 5C16.4183 5 20 8.58172 20 13C20 17.4183 16.4183 21 12 21C7.58172 21 4 17.4183 4 13ZM18 13C18 16.3137 15.3137 19 12 19C8.68629 19 6 16.3137 6 13C6 9.68629 8.68629 7 12 7V13H18Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </button>
+  </div>
+  <div class="robot"></div>
+  <div class="container">
+    <span>Feeling lonely? 😴</span>
+    <span>
+      <a (click)="onHandleInviteFriend()" class="text-primary nav-link">invite people</a>
+    </span>
+  
+    <!-- <div class="table-container row" style="height: auto">
+          <div class="col col-2 bg-primary mt-5 mb-5" style="">
+            <deck></deck>
+          </div>
+          <div class="col col-8 bg-secondary" style="position: relative">
+            <div class="bg-success on-top w-100" style="height: 50px"></div>
+            <div class="table-center">
+                <button>abc</button>
+            </div>
+            <div class="bg-warning on-bottom w-100" style=""></div>
+          </div>
+          <div class="col col-2 bg-danger"></div>
+        </div> -->
+  
+    <div class="table-container">
+      <div class="side-left-table side-table table-items">
+          <deck [isFlip]="false" *ngFor="let _ of game_play[3]"></deck>
+      </div>
+      <div class="top-table table-items" >
+        <deck [isFlip]="false" *ngFor="let _ of game_play[1]"></deck>
+      </div>
+  
+      <div class="table">
+        <div class="table-items-container">
+          <button class="p-2" mat-flat-button color="primary" (click)="onHandleReveal()">Reveal Cards</button>
+        </div>
+      </div>
+  
+      <div class="bottom-table table-items" >
+          <deck *ngFor="let item of game_play[0]" [isFlip]="false"> </deck>
+      </div>
+      <div class="side-right-table side-table table-items">
+          <deck *ngFor="let item of game_play[2]" [isFlip]="false"></deck>
+      </div>
+    </div>
+    <p>Choose your card 👇</p>
+    <div class="deck-container">
+      <div *ngFor="let item of voting_sys_arr">
+          <deck *ngIf="item !== null && item !==undefined && item !== ''" [selected]="selected === item ? true : false"   (click)="onDeckSelected(item)" [point]="item"></deck>
+      </div>
+    </div>
+  </div>
+  

@@ -1,13 +1,14 @@
-import { NgModule } from "@angular/core";
 import {MatInputModule} from '@angular/material/input';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatSelectModule} from '@angular/material/select';
-import { MatLabel, MatFormFieldModule } from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatButtonModule} from '@angular/material/button';
+import { NgModule } from '@angular/core';
 
 
 
 @NgModule({
-    exports: [ MatInputModule, MatBadgeModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatDialogModule ]
+    exports: [ MatInputModule, MatBadgeModule, MatSelectModule, MatDialogModule,MatSlideToggleModule, MatButtonModule]
 })
 export class MaterialCustomModule {}

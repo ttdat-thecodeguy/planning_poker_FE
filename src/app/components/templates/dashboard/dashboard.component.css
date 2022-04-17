@@ -19,13 +19,23 @@
         text-align: center;
     }
 }
-.Header1-module--header1--3uqnC {
+.title-page {
     color: #1a2935;
-    font-size: 4.8rem;
-    font-weight: 800;
+    font-size: 3.8rem;
+    font-weight: 550;
     line-height: 1.05em;
-    margin: 0;
+    margin-bottom: 30px;
     padding: 0;
+}
+
+.para-dashboard{
+    font-weight: 150;
+    margin-bottom: 20px;
+}
+
+.dashboard-start span{
+    padding: 0 5rem;
+    font-weight: 550;
 }
 
 .HomeTemplate-module--first-section__logos-list--3Nurh {
@@ -54,3 +64,11 @@
     padding: 0;
     text-transform: uppercase;
 }
+.para-dashboard-2{
+    color: #48545d;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+

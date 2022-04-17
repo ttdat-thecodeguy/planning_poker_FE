@@ -1,0 +1,10 @@
+<div class="deck-container">
+    <div class="deck-scene">
+        <div [ngClass]="[selected ? 'deck-selected deck deck-face' : 'deck deck-face', isFlip === undefined ? '' : isFlip === true ? 'deck-unflip front' : 'deck-default']">
+            <span *ngIf="isFlip === undefined">{{point}}</span>
+         </div>
+         <div [ngClass]="[isFlip == true ? 'back' : '']">
+            <span *ngIf="isFlip === true">{{point}}</span>
+         </div>
+    </div>
+</div>

@@ -1,21 +1,22 @@
 <div class="container-new-game Container-module--container--2j6nF">
     <p>Choose a name and a voting system for your game.</p>
-    <mat-form-field class="game" appearance="fill">
+    <mat-form-field class="game" appearance="outline">
         <mat-label>Game's Name</mat-label>
         <input matInput>
     </mat-form-field>
 
-    <mat-form-field class="game" appearance="fill">
-        <mat-select panelClass="game-panel">
-            <mat-option></mat-option>
-            <mat-option value="fibo">Fibonacci ( 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ? )</mat-option>
+    <mat-form-field class="game" appearance="outline">
+        <mat-label>Voting System</mat-label>
+        <mat-select panelClass="game-panel" [(value)]="chooseVoting"  >
+            <!-- <mat-option value="fibo">Fibonacci ( 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ? )</mat-option>
             <mat-option value="m-fibo">Modified Fibonacci ( 0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100, ? )</mat-option>
             <mat-option value="t-shirts">T-shirts (xxs, xs, s, m, l, xl, xxl, ?)</mat-option>
-            <mat-option value="x2">Powers of 2 ( 0, 1, 2, 4, 8, 16, 32, 64, ? )</mat-option>
+            <mat-option value="x2">Powers of 2 ( 0, 1, 2, 4, 8, 16, 32, 64, ? )</mat-option> -->
+            <mat-option *ngFor="let item of votings" [value]="item.voting_sys">{{ item.name }}</mat-option>
+            <mat-option (click)="onCustomDeck()" class="nav-link text-primary">Custom Deck</mat-option>
         </mat-select>
     </mat-form-field>
-    <button
-        class="Button-module--button--gRJWH Button-module--style-primary--1cJ-i Button-module--color-primary--y8Pc7 Button-module--is-block--a72JW btn-new-game is-clickable"
-        type="button"><span class="Button-module--content--gZuzt is-clickable"><span
-                class="Button-module--label--1ikt3 label-new-game">Start new game</span></span></button>
+    <button class="w-100 p-3" mat-flat-button color="primary">
+        <span>Start new game</span>
+    </button>
 </div>

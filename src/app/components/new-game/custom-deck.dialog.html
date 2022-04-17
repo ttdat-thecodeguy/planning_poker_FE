@@ -1,0 +1,32 @@
+<div class="dig">
+    <form  class="dialog-form custom-deck-form">
+        <div>
+            <h1 mat-dialog-title style="float: left">Custom Deck</h1>
+            <span class="btn-close-dialog" [mat-dialog-close]>&#x2715;</span>
+        </div>
+        <mat-form-field class="game" appearance="outline">
+            <mat-label>Deck's Name</mat-label>
+            <input matInput value="My Custom Deck" [ngModel]="name" name="name" (ngModelChange)="onCustomNameDeckChange($event)">
+        </mat-form-field>
+    
+        <mat-form-field class="game" appearance="outline">
+            <mat-label>Deck values</mat-label>
+            <input matInput name="deck_values" [ngModel]="voting_sys" (ngModelChange)="onVotingSystemInputChange($event)">
+            <mat-hint class="text-primary">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 2.6665C8.64802 2.6665 2.66669 8.64784 2.66669 15.9998C2.66669 23.3518 8.64802 29.3332 16 29.3332C23.352 29.3332 29.3334 23.3518 29.3334 15.9998C29.3334 8.64784 23.352 2.6665 16 2.6665ZM16 26.6665C10.1187 26.6665 5.33335 21.8812 5.33335 15.9998C5.33335 10.1185 10.1187 5.33317 16 5.33317C21.8814 5.33317 26.6667 10.1185 26.6667 15.9998C26.6667 21.8812 21.8814 26.6665 16 26.6665ZM14.6667 10.6665C14.6667 9.93012 15.2636 9.33317 16 9.33317C16.7364 9.33317 17.3334 9.93012 17.3334 10.6665C17.3334 11.4029 16.7364 11.9998 16 11.9998C15.2636 11.9998 14.6667 11.4029 14.6667 10.6665ZM14.6667 15.9998C14.6667 15.2635 15.2636 14.6665 16 14.6665C16.7364 14.6665 17.3334 15.2635 17.3334 15.9998V21.3332C17.3334 22.0695 16.7364 22.6665 16 22.6665C15.2636 22.6665 14.6667 22.0695 14.6667 21.3332V15.9998Z" fill="currentColor"></path></svg>
+                Enter up to 3 characters per value, separated by commas.</mat-hint>
+        </mat-form-field>
+    
+        <h5 class="mt-5">Preview</h5>
+        <span>This is a preview of how your deck will look like.</span>
+        <div class="deck-container">
+            <div *ngFor="let item of voting_sys_arr">
+                <deck *ngIf="item !== null && item !==undefined && item !== '' && checkDeckValues(item)" [selected]="selected === item ? true : false"   (click)="onDeckSelected(item)" [point]="item"></deck>
+            </div>
+        </div>
+        <div class="row">
+            <button class="col-md-6 p-3" mat-stroked-button color="primary" [mat-dialog-close]>Cancel</button>
+            <button class="col-md-6 p-3" mat-flat-button color="primary" (click)="onHandleSubmitCustomDeck()">Save</button>
+        </div>
+    </form>
+</div>

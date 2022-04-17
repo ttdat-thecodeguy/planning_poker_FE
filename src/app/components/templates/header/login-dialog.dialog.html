@@ -1,21 +1,23 @@
-<h4 class="pt-5 pb-5">Sign in</h4>
-
-<form class="dialog-form login-form">
+<div class="dig">
+  <form class="dialog-form login-form">
+    <div>
+      <h1 mat-dialog-title style="float: left">Sign up</h1>
+      <span class="btn-close-dialog" [mat-dialog-close]>&#x2715;</span>
+    </div>
     <mat-form-field class="game" appearance="outline">
-        <mat-label>Username</mat-label>
-        <input matInput>
+      <mat-label>Username</mat-label>
+      <input matInput />
     </mat-form-field>
-    
+  
     <mat-form-field class="game" appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput>
+      <mat-label>Password</mat-label>
+      <input matInput />
     </mat-form-field>
-    <button type="button" class="btn btn-primary">Login</button>
-</form>
-<div class="row mt-3">
+    <button class="p-2 mt-3 mb-3" mat-flat-button color="primary">Login</button>
+  </form>
+  <div class="row mt-3">
     <a href="/" class="col-9 nav-link">Create my account</a>
     <a href="/" class="col nav-link">Forgot?</a>
+  </div>
 </div>
-
-
 

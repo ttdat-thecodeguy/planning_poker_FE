@@ -1,14 +1,22 @@
 .game{
     width: 100%;
 }
-
 .container-new-game{
     text-align: center;
+    position: absolute;
+    top: 30%;
+    left: 35%;
 }
 
-.btn-new-game{
+.new-game-btn{
     width: 100%;
 }
-.Button-module--button--gRJWH .label-new-game{
+
+.new-game-btn .Button-module--label--1ikt3{
     padding: 0 32rem;
+}
+
+
+.custom-deck-form{
+    width: 64.8rem;
 }
