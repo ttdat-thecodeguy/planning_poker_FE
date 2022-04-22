@@ -21,6 +21,9 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@ngrx/store": "^13.1.0",
+    "lodash": "^4.17.21",
+    "ng2-stomp-service": "^1.2.2",
+    "ngx-image-cropper": "5.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -31,13 +34,19 @@
     "@angular/compiler-cli": "~13.3.0",
     "@angular/material": "^13.3.2",
     "@types/jasmine": "~3.10.0",
+    "@types/lodash": "^4.14.182",
     "@types/node": "^12.11.1",
+    "@types/sockjs-client": "^1.5.1",
+    "@types/stompjs": "^2.3.5",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "net": "^1.0.2",
+    "sockjs-client": "^1.6.0",
+    "stompjs": "^2.3.3",
     "typescript": "~4.6.2"
   }
 }

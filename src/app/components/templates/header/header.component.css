@@ -3,6 +3,7 @@
 
 header{
     font-size: 0.6rem;
+    width: fit-content;
 }
 .Header-module--header--1Buac, .Header-module--header--1Buac .Header-module--left--267pO, .Header-module--header--1Buac .Header-module--right--1lnib {
     align-items: center;
@@ -48,6 +49,7 @@ header{
 .Header-module--header--1Buac, .Header-module--header--1Buac .Header-module--left--267pO, .Header-module--header--1Buac .Header-module--right--1lnib {
     align-items: center;
     display: flex;
+   
 }
 
 
@@ -72,10 +74,10 @@ header{
     position: relative;
 }
 
-.Link-module--link--1-kR4 {
+.link-logo {
     color: #3993ff;
     font-weight: 700;
-    text-decoration: none;
+    text-decoration: none;  
 }
 
 .Button-module--style-primary--1cJ-i.Button-module--color-primary--y8Pc7 {
@@ -113,7 +115,7 @@ header{
 }
 
 .Button-module--button--gRJWH .Button-module--label--1ikt3 {
-    padding: 0 1.4rem;
+    padding: 0 1rem;
 }
 
 .ButtonDropdown-module--wrapper--K4LcQ {
@@ -132,10 +134,10 @@ header{
     display: inline-flex;
     font-size: 1.2rem;
     font-weight: 700;
-    height: 5.6rem;
+    height: 5rem;
     letter-spacing: .02em;
     outline: 0;
-    padding: 0 1.6rem;
+    padding: 0 1rem;
     position: relative;
     text-align: center;
     text-decoration: none;
@@ -147,8 +149,8 @@ header{
 }
 
 .ProfileImage-module--profile-img--m--2cTYz, .ProfileImage-module--profile-img--m--2cTYz img {
-    height: 3.2rem;
-    width: 3.2rem;
+    height: 3rem;
+    width: 3rem;
 }
 
 .ProfileImage-module--profile-img--2Ja-6, .ProfileImage-module--profile-img--2Ja-6 img {
@@ -180,7 +182,11 @@ header{
 
 
 .dropdown-menu{
-    min-width: 15rem;
+    min-width: 17rem;
+    left: -35px !important;
+}
+.dropdown-menu .dropdown-item{
+    color: #8a8a8a;
 }
 
 .nav-header{
@@ -190,4 +196,8 @@ header{
     color: #3993ff;
     font-weight: 580;
     background: none;
+}
+
+.Header-module--logo-link--2D3Yu .Header-module--logo-icon--2_jSs {
+    width: 3.8rem;
 }

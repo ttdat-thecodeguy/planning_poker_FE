@@ -26,3 +26,4 @@ export const VOTES: VotingSys[] = [
     voting_sys: "0, 1, 2, 4, 8, 16, 32, 64, ?",
   },
 ];
+export const API_URL = "http://localhost:8080/api";

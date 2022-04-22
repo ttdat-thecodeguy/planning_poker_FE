@@ -10,10 +10,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {  MaterialCustomModule } from "./material.module"
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { GameTableComponent, InviteFriend } from './components/game-table/game-table.component';
+import { GameTableComponent, InviteFriend, SigninAsGuestDialog } from './components/game-table/game-table.component';
 import { DeckComponent } from './components/deck/deck.component';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { StoreModule } from '@ngrx/store';
+
+import { authReducer } from "./store/reducers/users.reducers"
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { TokenInterceptorService } from './interceptors/token-interceptor.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotiComponent } from './components/noti/noti.component';
 
 
 
@@ -28,18 +36,33 @@ import { FormsModule } from '@angular/forms';
     CustomDeckDialog,
     GameTableComponent,
     DeckComponent,
-    InviteFriend
+    InviteFriend,
+    SigninAsGuestDialog,
+    NotFoundComponent,
+    NotiComponent
   ],
   imports: [
     CommonModule,
     FormsModule, 
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     /* Material Module */
     MaterialCustomModule,
-    RouterModule
+    RouterModule,
+    
+    ImageCropperModule,
+    HttpClientModule,
+    StoreModule.forRoot({ auth : authReducer })
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   exports: [AppRoutingModule],
   bootstrap: [AppComponent],
 

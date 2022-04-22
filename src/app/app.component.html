@@ -1,5 +1,20 @@
 
-    <app-header></app-header>
+    <app-header [user]="$auth"></app-header>
     <div class="VerticalSpacing-module--vertical-spacer--spacing-xxl--2nH6M"></div>
     <router-outlet></router-outlet>
 
+    <!-- <input type="file" (change)="fileChangeEvent($event)" /> -->
+<!-- <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="2 / 2"
+    [roundCropper] = "true"
+    format="png"
+    (imageLoaded)="imageLoaded()"
+    (cropperReady)="cropperReady()"
+    (loadImageFailed)="loadImageFailed()"
+    []
+
+></image-cropper>
+
+<img [src]="croppedImage" /> -->

@@ -13,76 +13,59 @@ body {
     min-height: -webkit-fill-available;
     min-width: 100vw;
 }
+body, html {
+    background: #fff;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+header{
+    margin: 30px;
+    width: 100% !important;
+}
+/*Useful*/
+.cursor-pointer{
+    cursor: pointer !important;
+}
+.f-w-550{
+    font-weight: 550 !important;
+}
+/*Dropdown bootstrap*/
+.dropdown-item{
+    padding: 14px 19px;
+    margin: 0;
+    color: #000 !important;
+}
+.dropdown-item:hover{
+    background-color: #cbe0fa;
+    cursor: pointer;
+}
+.dropdown-item:active{
+    background-color: #cbe0fa;
+}
+
+.dropdown-divider{
+    margin: 0;
+}
+.dropdown-item .icn{
+    margin-right: 10px;
+}
+/*Distance*/
+.Container-module--container--2j6nF {
+    margin: 0 auto;
+    max-width: 1280px;
+}
 .VerticalSpacing-module--vertical-spacer--spacing-xxl--2nH6M {
     height: 8rem;
 }
 .VerticalSpacing-module--vertical-spacer--spacing-xxl-4--oAhA1 {
     height: 6.4rem;
 }
-
-body, html {
-    background: #fff;
-}
-.Container-module--container--2j6nF {
-    margin: 0 auto;
-    max-width: 1280px;
-}
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-header{
-    margin: 30px;
-}
-
-.mat-form-field-appearance-fill .mat-form-field-flex {
-    background-color: rgb(255 255 255);
-    border: 2px solid #e8e9ea;
-} 
-/* 
-.mat-form-field-flex{
-    background-color: #fff;
-    border:2px solid #e8e9ea;
-} */
-.Button-module--style-primary--1cJ-i.Button-module--color-primary--y8Pc7 {
-    background: #3993ff;
-}
-
-.Button-module--button--gRJWH.Button-module--is-block--a72JW {
-    width: 50%;
-}
-.Button-module--style-primary--1cJ-i {
-    border: 0;
-    color: #fff;
-}
-.Button-module--button--gRJWH {
-    align-items: center;
-    border: 0;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 1.8rem;
-    font-weight: 700;
-    height: 5.6rem;
-    letter-spacing: .02em;
-    outline: 0;
-    padding: 0;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    transition: all .09s linear;
-}
-.Button-module--button--gRJWH .Button-module--label--1ikt3 {
-    padding: 0 6rem;
-}
-
 /* Dialog */
 .dialog-form{
     display: grid;
-    width: 450px;
+    width: 960px;
 }
-.login-form{
-    
-}
-
 .btn-close-dialog{
     float: right;
     border-radius: 50%;
@@ -97,16 +80,33 @@ header{
 .mat-dialog-container {
     border-radius: 10px !important;
 }
-.mat-flat-button{
-    border-radius: 10px !important;
+
+.mat-drawer{
+    z-index: 10 !important;
 }
+
 .dig{
     font-size: smaller;
     margin: 30px;
 }
+/**** Login Dialog ****/
+.error-auth{
+    margin-top: 20px;
+    padding: 20px 10px;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: #ff3d71;
+    color: #ff3d71;
+}
 /*Deck Section*/
-
 .deck-container{
     display: flex;
     margin: 30px auto 0 auto;
+}
+/* Custom Material UI */
+.mat-flat-button{
+    border-radius: 10px !important;
+}
+.mat-drawer-container{
+    position: initial !important;
 }

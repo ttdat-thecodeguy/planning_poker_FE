@@ -1,1 +1,6 @@
-
+--cropper-overlay-color	{
+    background-color: rgb(0, 0, 0);
+}
+--cropper-outline-color	{
+    background-color: rgba(151, 151, 151, 0.9);
+}

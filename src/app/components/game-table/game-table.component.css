@@ -67,3 +67,55 @@
   .side-table{
     margin-bottom: 80px
   }
+  .btn-icon{
+        background: #ebf4ff;
+        height: 4.4rem;
+        opacity: .6;
+        position: relative;
+        width: 4.4rem;
+        border: 0;
+        cursor: pointer;
+        border-radius: 50%;
+        margin-left: 30px;
+  }
+  .robot{
+    position: absolute;
+    bottom: 50px;
+  }
+  .issues-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 30px;
+  }
+  .sidenav{
+    width: 30rem;
+  }
+  .btn-import-issues{
+    background: none;
+    color: rgb(0, 0, 0);
+    border: none;
+  }
+  .issues-main{
+    padding: 1.2rem 4rem;
+  }
+  .add-issue{
+    background:none;
+    border: none;
+    
+    
+  }
+  .issue-container{
+    transition: all .3s ease-out;
+    position: relative;
+    border-radius: 10px;
+    padding: 10px 20px;
+  }
+  .issue-container:hover{
+    background-color: #f3f3f3;
+  }
+  .btn-fc{
+    border: 2px solid #74b3ff !important;
+    color: #74b3ff;
+    margin-left: 30px;
+    margin-bottom: 30px;
+  }

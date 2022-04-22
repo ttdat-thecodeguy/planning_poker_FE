@@ -1,0 +1,20 @@
+<div class="dig">
+    <form class="dialog-form" [formGroup]="signUpAsGuestForm" (submit)="onSignUpAsGuestSubmit()">
+        <div>
+            <h1 mat-dialog-title style="float: left">Choose your display name</h1>
+        </div>
+        <mat-form-field class="game" appearance="outline">
+            <mat-label>Your display name</mat-label>
+            <input matInput formControlName="display_name" name="display_name" />
+        </mat-form-field>
+        <span class="text-center">
+            <mat-slide-toggle color="primary" formControlName="isSpector" name="isSpector"></mat-slide-toggle> Join as Spectator
+        </span>
+        <button class="p-2 mt-3 mb-3" mat-flat-button color="primary">Continue to game</button>
+
+    </form>
+    <div class="row mt-3">
+        <a (click)="onLogin()"  class="col-9 nav-link text-primary">Create my account</a>
+        <a href="/" class="col nav-link">Forgot?</a>
+      </div>
+</div>

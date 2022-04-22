@@ -1,19 +1,25 @@
 <div class="dig">
-  <form class="dialog-form login-form">
+  <form class="dialog-form login-form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
     <div>
-      <h1 mat-dialog-title style="float: left">Sign up</h1>
+      <h1 mat-dialog-title style="float: left">Login</h1>
       <span class="btn-close-dialog" [mat-dialog-close]>&#x2715;</span>
     </div>
-    <mat-form-field class="game" appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput />
+    <mat-form-field class="game mb-4" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput  formControlName="email" type="email" required />
+      <mat-hint align="start" color="danger"> &#9888; Required Email</mat-hint>
     </mat-form-field>
   
     <mat-form-field class="game" appearance="outline">
       <mat-label>Password</mat-label>
-      <input matInput />
+      <input matInput formControlName="password" type="password" required />
+      <mat-hint align="start" color="danger"> &#9888; Required password</mat-hint>
     </mat-form-field>
-    <button class="p-2 mt-3 mb-3" mat-flat-button color="primary">Login</button>
+    <div class="error-auth" *ngIf=" err.error !== '' ">
+      <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.953 2C6.465 2 2 6.486 2 12C2 17.514 6.486 22 12 22C17.514 22 22 17.514 22 12C22 6.486 17.493 2 11.953 2ZM12 20C7.589 20 4 16.411 4 12C4 7.589 7.567 4 11.953 4C16.391 4 20 7.589 20 12C20 16.411 16.411 20 12 20ZM11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8V12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12V8ZM11 16C11 15.4477 11.4477 15 12 15C12.5523 15 13 15.4477 13 16C13 16.5523 12.5523 17 12 17C11.4477 17 11 16.5523 11 16Z" fill="currentColor"></path></svg></span>
+      <span class="ml-2">{{err.error}}</span>
+    </div>
+    <button class="p-2 mt-3 mb-3" mat-flat-button color="primary" type="submit" >Login</button>
   </form>
   <div class="row mt-3">
     <a href="/" class="col-9 nav-link">Create my account</a>
