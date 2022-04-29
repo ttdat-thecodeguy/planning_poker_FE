@@ -1,5 +1,5 @@
 <div class="dig">
-    <form  class="dialog-form custom-deck-form">
+    <form class="dialog-form custom-deck-form">
         <div>
             <h1 mat-dialog-title style="float: left">Custom Deck</h1>
             <span class="btn-close-dialog" [mat-dialog-close]>&#x2715;</span>
@@ -19,7 +19,7 @@
     
         <h5 class="mt-5">Preview</h5>
         <span>This is a preview of how your deck will look like.</span>
-        <div class="deck-container">
+        <div class="deck-container d-flex" style="margin: 0 auto">
             <div *ngFor="let item of voting_sys_arr">
                 <deck *ngIf="item !== null && item !==undefined && item !== '' && checkDeckValues(item)" [selected]="selected === item ? true : false"   (click)="onDeckSelected(item)" [point]="item"></deck>
             </div>

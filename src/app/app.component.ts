@@ -20,7 +20,9 @@ export class AppComponent implements OnInit{
         }
         
         if(this.$auth === undefined){
-          store.select('auth').subscribe(item => this.$auth = item.auth)
+          store.select('auth').subscribe(item =>{
+             this.$auth = item.auth
+          })
         }
     }
     ngOnInit(): void {

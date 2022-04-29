@@ -4,5 +4,5 @@ export interface Table{
     voting: string,
     userOwerId: number,
     issues: string[],
-
+    isShowCardByOwner: boolean
 }

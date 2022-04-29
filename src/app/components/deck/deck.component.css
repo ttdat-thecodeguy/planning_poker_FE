@@ -4,23 +4,6 @@
   width: 4rem;
   margin: 5px 10px;
 }
-/* .deck-container .deck {
-  align-items: center;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  background: #fff;
-  border: 2px solid #3993ff;
-  border-radius: 0.6rem;
-  color: #3993ff;
-  display: flex;
-  font-weight: 700;
-  height: 6rem;
-  justify-content: center;
-  overflow: hidden;
-  width: 3.5rem;
-  transition: all 0.3s ease-out;
-  backface-visibility: hidden;
-} */
 
 .deck-container .deck {
   position: absolute;
@@ -38,13 +21,6 @@
   
 }
 
-.deck-face {
-}
-
-.deck-container .deck:hover {
-  cursor: pointer;
-  transform: translate(0, -5px);
-}
 .deck-selected {
   transform: translate(0, -10px);
   background-color: #3993ff !important;
@@ -106,4 +82,8 @@
 .deck-default{
     background: #e8e9ea;
     border: none !important;
+}
+
+.deck-spectator-mode{
+  border: 2px dashed #8d8d8d !important;
 }

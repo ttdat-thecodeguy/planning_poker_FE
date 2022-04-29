@@ -6,3 +6,8 @@ export const userSignUpAsGuest = createAction('user sign up as guest',props<{ pa
 export const userSignAction = createAction('user sign',props<{ payload: UserResponse | UserSignError }>());
 export const userLogoutAction = createAction('user logout');
 export const userLoginError = createAction('login fail', props<{ payload? : any }>());
+
+
+////
+
+export const userSpectatorModeAction = createAction('user in spectator mode', props<{ payload : boolean }>());

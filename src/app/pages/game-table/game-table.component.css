@@ -82,6 +82,11 @@
     position: absolute;
     bottom: 50px;
   }
+
+  .mat-form-field{
+    width: 100%;
+  }
+
   .issues-header{
     display: flex;
     justify-content: space-between;
@@ -96,13 +101,18 @@
     border: none;
   }
   .issues-main{
-    padding: 1.2rem 4rem;
+    padding: 1.2rem 1rem;
   }
   .add-issue{
     background:none;
     border: none;
-    
-    
+    width: 100%;
+    padding: 10px 15px;
+    text-align: left;
+    border-radius: 10px;
+  }
+  .add-issue:hover{
+    background-color: #f3f3f3;
   }
   .issue-container{
     transition: all .3s ease-out;
@@ -110,12 +120,16 @@
     border-radius: 10px;
     padding: 10px 20px;
   }
-  .issue-container:hover{
-    background-color: #f3f3f3;
-  }
+  
   .btn-fc{
     border: 2px solid #74b3ff !important;
     color: #74b3ff;
     margin-left: 30px;
     margin-bottom: 30px;
+  }
+  
+  .issue-text{
+    resize: none;
+    outline: none;
+    border: none;
   }

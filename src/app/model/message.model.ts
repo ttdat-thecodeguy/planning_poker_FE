@@ -2,7 +2,7 @@ import { UserResponse } from "./user-response.model";
 
 export interface Message{
     messageType: string,
-    sender: UserResponse, 
+    sender: number, 
     content: string,
     table: string
 }

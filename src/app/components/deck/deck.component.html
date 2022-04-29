@@ -1,10 +1,14 @@
 <div class="deck-container">
     <div class="deck-scene">
-        <div [ngClass]="[selected ? 'deck-selected deck deck-face' : 'deck deck-face', isFlip === undefined ? '' : isFlip === true ? 'deck-unflip front' : 'deck-default']">
-            <span *ngIf="isFlip === undefined">{{point}}</span>
+        <div [ngClass]="[selected ? 'deck-selected deck deck-face' : 'deck  deck-face', isFlip === undefined ? '' : isFlip === true ? 'deck-unflip front' : 'deck-default', SpectatorMode ? 'deck-spectator-mode' :  ''   ]">
+            <span *ngIf="isFlip === undefined && SpectatorMode === false">{{point}}</span>
+            <span *ngIf="SpectatorMode === true">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </span>
          </div>
          <div [ngClass]="[isFlip == true ? 'back' : '']">
             <span *ngIf="isFlip === true">{{point}}</span>
          </div>
     </div>
+    <h6 *ngIf="userOwnerName">{{userOwnerName}}</h6>
 </div>

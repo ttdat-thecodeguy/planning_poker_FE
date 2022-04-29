@@ -11,8 +11,8 @@ export class DeckComponent implements OnInit, OnChanges {
   @Input() selected?: boolean;
   @Input() isFlip: boolean | undefined;
   @Input() userOwner?: number
-
-
+  @Input() SpectatorMode : boolean = false;
+  @Input() userOwnerName? : string 
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {

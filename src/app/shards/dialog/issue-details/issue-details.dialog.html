@@ -1,0 +1,27 @@
+<div class="dig">
+    <form class="dialog-form">
+        <div>
+            <span class="btn-close-dialog" [mat-dialog-close]>&#x2715;</span>
+        </div>
+        <h5>{{ data.id }}</h5>
+        <h2>{{ data.name }}</h2>
+
+        <mat-label>Link</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Add Link to Issue"/>
+        </mat-form-field>
+
+        <mat-label>Description</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Add Description"/>
+        </mat-form-field>
+        <div class="d-inline-block w-100">
+            <button type="button" color="primary" class="float-left" mat-flat-button>
+                Vote this issue
+            </button>
+            <button type="button" color="secondary" class="float-right" mat-stroked-button>
+                -
+            </button>
+        </div>
+    </form>
+</div>

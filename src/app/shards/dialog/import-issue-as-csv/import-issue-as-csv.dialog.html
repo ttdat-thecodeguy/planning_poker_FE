@@ -1,0 +1,68 @@
+<style>
+    
+</style>
+
+
+<div class="dig">
+    <form class="dialog-form">
+        <div>
+            <h1 mat-dialog-title style="float: left">Import from CSV file</h1>
+            <span class="btn-close-dialog" [mat-dialog-close]>&#x2715;</span>
+        </div>
+    <ng-container *ngIf="dataSource !== undefined">
+        <span (click)="onTurnToUpload()" class="btn-turn-back" >
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </span>
+        <table mat-table recycleRows  [dataSource]="dataSource" class="mt-3 mat-elevation-z8 table-csv">
+              <ng-container cdkColumnDef="Summary">
+                <th mat-header-cell *cdkHeaderCellDef> Summary </th>
+                <td mat-cell *cdkCellDef="let element"> {{ getObjectByValue(element)[0] }} </td>
+              </ng-container>
+              <ng-container cdkColumnDef="Description">
+                <th mat-header-cell *cdkHeaderCellDef> Description </th>
+                <td mat-cell *cdkCellDef="let element"> {{ getObjectByValue(element)[1] }} </td>
+              </ng-container>
+              <ng-container cdkColumnDef="Key">
+                <th mat-header-cell *cdkHeaderCellDef> Key </th>
+                <td mat-cell *cdkCellDef="let element"> {{getObjectByValue(element)[2]}} </td>
+              </ng-container>
+              <ng-container cdkColumnDef="Link">
+                <th mat-header-cell *cdkHeaderCellDef> Link </th>
+                <td mat-cell *cdkCellDef="let element"> {{getObjectByValue(element)[3]}} </td>
+              </ng-container>
+              <ng-container cdkColumnDef="Story Points">
+                <th mat-header-cell *cdkHeaderCellDef> Story Points </th>
+                <td mat-cell *cdkCellDef="let element"> {{getObjectByValue(element)[4]}} </td>
+              </ng-container>
+              <tr mat-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="float-right mt-3">
+            <button type="button" class="mr-2"  mat-stroked-button (click)="onTurnToUpload()"	>
+                Cancel
+              </button>
+              <button type="submit" color="primary"  mat-flat-button (click)="onUploadCSV()">
+                Save
+              </button>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="dataSource === undefined">
+       
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="" id="" [(ngModel)]="checkedValue" name="includeHeader" >
+                    User first csv row as headers
+                </label>
+            </div>
+            <div class="form-group upload-area" (click)="upload.click()">
+                <h4>
+                    <i class="fa fa-upload" aria-hidden="true"></i>
+               </h4>
+                <h5>Drag 'n' drop some files here, or <a id="uploadFile"> Choose File </a>  </h5>
+                <input hidden type="file" class="form-control-file upload-file-btn"  #upload (change)="onChangeFileUpload($event)">
+            </div>
+        
+    </ng-container>
+    </form>
+
+</div>

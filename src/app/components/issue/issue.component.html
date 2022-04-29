@@ -1,0 +1,26 @@
+<div class="issue-box mb-2" *ngIf="issue !== undefined" >
+    <h5>{{ issue.id }}</h5>
+    <p>{{ issue.name }}</p>
+    <div class="d-inline-block w-100">
+        <button type="button" color="accent" class="float-left" mat-flat-button>
+            Vote this issue
+        </button>
+
+        <button type="button" color="accent" class="ml-2" mat-flat-button (click)="onOpenIssueDetails()">
+            See Details
+        </button>
+
+        <!-- <mat-form-field appearance="outline" >
+         
+            <mat-select  mat-stroked-button>
+              <mat-option>1</mat-option>
+              <mat-option>2</mat-option>
+              <mat-option>4</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+        <button type="button" color="secondary" class="float-right" mat-stroked-button>
+            {{ issue.storyPoint === '' || issue.storyPoint === null ? "-" : issue.storyPoint }}
+        </button>
+    </div>
+</div>

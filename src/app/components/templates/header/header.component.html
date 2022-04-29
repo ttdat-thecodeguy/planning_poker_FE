@@ -196,7 +196,8 @@
                   </div>
                   <div style="flex-grow: 1;">
                       <div class="float-right"> 
-                        <mat-slide-toggle color="primary"></mat-slide-toggle>
+                        <mat-slide-toggle [(ngModel)]="toggleSpectatorMode"
+                        (change)="onToggleSpectatorMode($event)" color="primary"></mat-slide-toggle>
                     </div>
                   </div>
                   

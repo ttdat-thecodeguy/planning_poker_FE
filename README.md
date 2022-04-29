@@ -17,3 +17,7 @@ auth
 	->login
 	->signup
 
+table status
+ 	2. show cards (với các user khum có quyền -> voting in progress) -> BUG
+	4. 2 message VOTING_WITH_ISSUE VÀ VOTING WITHOUT ISSUE
+	5. UPDATE ISSUE POINT

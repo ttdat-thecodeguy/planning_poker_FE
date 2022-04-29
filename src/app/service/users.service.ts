@@ -6,7 +6,7 @@ import {  Observable } from "rxjs";
 import { API_URL } from "../model/constants/constants";
 import { UserSignError } from "../model/user-error.model";
 import { UserResponse } from "../model/user-response.model";
-import { userLogoutAction } from "../store/actions/users.action";
+import { userLogoutAction, userSpectatorModeAction } from "../store/actions/users.action";
 
 
 @Injectable({
@@ -38,12 +38,26 @@ export class UserService {
         let data = {
             displayName
         }
-        return this.http.post<UserResponse>(`${API_URL}/signup-as-guest?isSpectator=${ isSpectator ? 1 : 0 }&tableId=${tableId}`,data, this.httpOptions)
+        return this.http.post<UserResponse>(`${API_URL}/signup-as-guest?isSpectator=${ isSpectator ? true : false }&tableId=${tableId}`,data, this.httpOptions)
     }
+
+    activeSpectatorMode(isActive : boolean){
+        // spectorMode
+        this.store.dispatch(userSpectatorModeAction({ payload: isActive }));
+        // update in storage
+        let json = localStorage.getItem("userLogin");
+        if(json !== null){
+            let user = JSON.parse(json);
+            user.spectorMode = isActive;
+            localStorage.setItem("userLogin", JSON.stringify(user));
+        }
+    }
+
     logOut(){
         this.store.dispatch(userLogoutAction());
         localStorage.removeItem('userLogin');
-        this.router.navigate(['/dashboard'])      
+        this.router.navigate(['/dashboard']) 
+        window.location.href = "/dashboard"  
     }
 
     

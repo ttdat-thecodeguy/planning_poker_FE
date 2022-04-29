@@ -1,0 +1,11 @@
+.issue-box{
+    background-color: #f3f3f3;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all .3s;
+}
+
+.issue-box:hover{
+    cursor: pointer;
+    background-color: #eae9e9;
+}
