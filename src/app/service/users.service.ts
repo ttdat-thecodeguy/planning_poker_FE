@@ -4,9 +4,10 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import {  Observable } from "rxjs";
 import { API_URL } from "../model/constants/constants";
+import { Token } from "../model/token.model";
 import { UserSignError } from "../model/user-error.model";
 import { UserResponse } from "../model/user-response.model";
-import { userLogoutAction, userSpectatorModeAction } from "../store/actions/users.action";
+import { refreshTokenAction, userLogoutAction, userSpectatorModeAction } from "../store/actions/users.action";
 
 
 @Injectable({
@@ -50,6 +51,29 @@ export class UserService {
             let user = JSON.parse(json);
             user.spectorMode = isActive;
             localStorage.setItem("userLogin", JSON.stringify(user));
+        }
+    }
+
+    refreshToken(refreshToken : string) : Observable<any>{
+        /*
+            get data from store or application storage
+        */
+        this.httpOptions = {
+            headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization' : '' })
+        };
+        let data = {
+            refreshedToken : refreshToken
+        }
+        return this.http.post(`${API_URL}/refresh-token`, data  , this.httpOptions);
+    }
+
+    refreshTokenSubscribe(t : Token) {
+        this.store.dispatch(refreshTokenAction({ payload : t.token }))
+        let auth = JSON.parse(localStorage.getItem('userLogin')!);
+        if(auth){
+            console.log("set new token " + t.token);
+            auth.token = t.token;
+            localStorage.setItem('userLogin', JSON.stringify(auth))
         }
     }
 

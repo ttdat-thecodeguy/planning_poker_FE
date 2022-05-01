@@ -32,6 +32,6 @@ export class IssueService {
         return this.http.post<Issue[]>(`${API_URL}/issue/import-as-csv?tableId=${tableId}&isIncludeHeader=${isIncludeHeader}`, formData);
     }
     deleteIssue(tableId : string) : Observable<any>{
-        return this.http.delete(``)
+        return this.http.delete(`${API_URL}/issue/delete-all?tableId=${tableId}`)
     }
 }

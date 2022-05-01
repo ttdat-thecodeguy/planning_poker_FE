@@ -103,6 +103,23 @@ header{
     margin: 30px;
     width: 960px;
 }
+
+@media only screen and (max-width: 1200px) and (min-width: 860px) {
+    .dig{
+        width: 610px;
+    }
+}
+
+@media only screen and (max-width: 860px)  {
+    .dig{
+        width: fit-content
+    }
+    body{
+        font-size: 1rem;
+    }
+}
+
+
 /**** Login Dialog ****/
 .error-auth{
     margin-top: 20px;

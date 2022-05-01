@@ -35,6 +35,7 @@ import { SignUpDialog } from "../signup/signup.dialog"
       this.userService.signupAsGuest(form_data.display_name, this.tableId, form_data.isSpector ).subscribe(
         item => {
           this.store.dispatch(userSignAction({ payload: item }))
+          // không lưu storage với user guest
           localStorage.setItem('userLogin', JSON.stringify(item));
           this.dRef.close({ item })
         }

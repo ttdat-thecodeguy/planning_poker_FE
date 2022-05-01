@@ -4,5 +4,6 @@ export interface UserResponse{
     email: string,
     displayName: string,
     guest: boolean,
-    spectorMode: boolean
+    spectorMode: boolean,
+    refreshToken: string
 }

@@ -20,4 +20,12 @@ export class TableService {
     findTableById(tableId : string) : Observable<Table>{
         return this.http.get<Table>(`${API_URL}/table/${tableId}`);
     }
+
+    updateOwner(tableId : string, userId : number) : Observable<Table>{
+        let data = {
+            tableId,
+            userId
+        }
+        return this.http.patch<Table>(`${API_URL}/table/update-owner`, data, this.httpOptions);
+    }
 }

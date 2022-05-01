@@ -34,9 +34,6 @@ export class NewGameComponent implements OnInit {
     item => {
       ///send name to link as state
       this.router.navigate(['/table', item.id], { state : { tableName : data.name === '' ? item.name : data.name } })
-    },
-    err => {
-      console.log(err)
     })
   }
 

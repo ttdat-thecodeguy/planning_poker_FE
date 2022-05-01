@@ -16,63 +16,6 @@ header{
     }
   }
 
-.Header-module--header--1Buac {
-    background-color: #fff;
-    justify-content: space-between;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    transition: all .2s;
-    z-index: 9;
-}
-
-.HoritzontalSpacing-module--horitzontal-spacer--spacing-xl--1UGVf {
-    width: 3.2rem;
-}
-
-.HoritzontalSpacing-module--horitzontal-spacer--2Tj58 {
-    display: inline-block;
-}
-
-.Header-module--header--1Buac, .Header-module--header--1Buac .Header-module--left--267pO, .Header-module--header--1Buac .Header-module--right--1lnib {
-    align-items: center;
-    display: flex;
-}
-
-.Link-module--link--1-kR4 {
-    color: #3993ff;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.Header-module--header--1Buac, .Header-module--header--1Buac .Header-module--left--267pO, .Header-module--header--1Buac .Header-module--right--1lnib {
-    align-items: center;
-    display: flex;
-   
-}
-
-
-.ButtonLink-module--button-link--2m9T6 {
-    background-color: transparent;
-    border: 0;
-    border-radius: 2px;
-    color: #3993ff;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: .02em;
-    outline: 0;
-    padding: 0;
-    position: relative;
-    transition: color .09s linear;
-}
-
-.ButtonDropdown-module--wrapper--K4LcQ {
-    display: inline-block;
-    max-width: 100%;
-    position: relative;
-}
 
 .link-logo {
     color: #3993ff;
@@ -80,51 +23,18 @@ header{
     text-decoration: none;  
 }
 
-.Button-module--style-primary--1cJ-i.Button-module--color-primary--y8Pc7 {
-    background: #3993ff;
-}
 
-.Button-module--style-primary--1cJ-i {
-    border: 0;
-    color: #fff;
-}
 
-.Button-module--button--gRJWH {
-    align-items: center;
-    border: 0;
-    border-radius: 0.8rem;
-    cursor: pointer;
-    display: inline-flex;
-    font-size: 1.2rem;
-    font-weight: 700;
-    height: 3.6rem;
-    letter-spacing: .02em;
-    outline: 0;
-    padding: 0;
-    position: relative;
-    text-align: center;
-    text-decoration: none;
-    transition: all .09s linear;
-}
 
-.Button-module--button--gRJWH .Button-module--content--gZuzt {
-    align-items: center;
-    display: flex;
-    margin: 0 auto;
-    text-decoration: none;
-}
 
-.Button-module--button--gRJWH .Button-module--label--1ikt3 {
-    padding: 0 1rem;
-}
 
-.ButtonDropdown-module--wrapper--K4LcQ {
+.btn-dropdown {
     display: inline-block;
     max-width: 100%;
     position: relative;
 }
 
-.ButtonDropdown-module--button--1gBcB {
+.btn-profile {
     align-items: center;
     background-color: transparent;
     border: 0;
@@ -134,44 +44,24 @@ header{
     display: inline-flex;
     font-size: 1.2rem;
     font-weight: 700;
-    height: 5rem;
+    height: 3.9rem;
     letter-spacing: .02em;
     outline: 0;
-    padding: 0 1rem;
+    padding: 0 1.2rem;
     position: relative;
     text-align: center;
     text-decoration: none;
     transition: all .09s linear;
 }
 
-.AuthButton-module--name--9DWGY {
-    font-size: 1.8rem;
-}
 
-.ProfileImage-module--profile-img--m--2cTYz, .ProfileImage-module--profile-img--m--2cTYz img {
-    height: 3rem;
-    width: 3rem;
-}
 
-.ProfileImage-module--profile-img--2Ja-6, .ProfileImage-module--profile-img--2Ja-6 img {
-    border-radius: 50%;
-}
 
-.ProfileImage-module--profile-img--empty--2hnDi {
-    align-items: center;
-    background-color: #d7e9ff;
-    color: #3993ff;
-    display: flex;
-    font-size: 1rem;
-    font-weight: 700;
-    justify-content: center;
-}
-
-.ButtonDropdown-module--button--1gBcB:hover{
+.btn-profile:hover{
     background-color: #f1f1f1;
 }
 
-.ButtonDropdown-module--button--1gBcB:focus{
+.btn-profile:focus{
     box-shadow: 0 0 0 2px #f9f9f9,0 0 0 4px #e8e9ea; 
 }
 
@@ -183,7 +73,7 @@ header{
 
 .dropdown-menu{
     min-width: 17rem;
-    left: -35px !important;
+    left: -120px !important;
 }
 .dropdown-menu .dropdown-item{
     color: #8a8a8a;
@@ -198,6 +88,13 @@ header{
     background: none;
 }
 
-.Header-module--logo-link--2D3Yu .Header-module--logo-icon--2_jSs {
-    width: 3.8rem;
+.profile .picture{
+    background-color: #dcecff;
+    padding: 14px 18px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.profile .name{
+    font-size: 22px;
 }

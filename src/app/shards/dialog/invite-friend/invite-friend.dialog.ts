@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { Component, ElementRef, Inject, ViewChild } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 /* Invite Friend */
@@ -9,5 +9,11 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
   export class InviteFriend {
     // get data from table page
     constructor(@Inject(MAT_DIALOG_DATA) public tableId : string) {}
+    @ViewChild('gameUrl') gameUrl? : HTMLInputElement; 
+
     invitationValue = window.location.href;
+
+    onCopyLink(){
+      this.gameUrl!.select()
+    }
   }

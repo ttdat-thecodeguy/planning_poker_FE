@@ -66,6 +66,7 @@ export class GameTableComponent implements OnInit {
     private userService: UserService,
     private r: Router,
     private store: Store<{ auth: any }>) { }
+  
   ngOnInit(): void {
     // updating....
     this.id = this.route.snapshot.paramMap.get('id');
@@ -76,7 +77,7 @@ export class GameTableComponent implements OnInit {
       if (data !== null) {
         this.$auth = JSON.parse(data)
       }
-
+      console.log(this.$auth)
       if (this.$auth === undefined) {
         this.store.select('auth')
           .subscribe(item => {
@@ -114,6 +115,8 @@ export class GameTableComponent implements OnInit {
           this.issues_arr = resp
         })
         this.voting_sys_arr = this.t.voting.split(',')
+
+        console.log(resp)
       })
       //// mở dialog sau
       if (isEmpty(this.$auth)) {
@@ -123,6 +126,8 @@ export class GameTableComponent implements OnInit {
           /// trong trường hợp table chưa có owner ==> mới tạo
           if (this.$auth && this.t.userOwerId === null) {
             this.t.userOwerId = this.$auth.id;
+            // update owner of table in db
+            this.tableService.updateOwner(this.id!, this.$auth.id).subscribe(resp => this.t = resp)
           }
           this._connect(this.$auth!, this.id!)
         })
@@ -426,21 +431,7 @@ export class GameTableComponent implements OnInit {
     // }
   }
   /* useful func */
-  rechangeDictToArr() {
-    return Object.keys(this.result)
-  }
-  /// get length of dict
-  getLengthOfDict() {
-    return Object.keys(this.result).length;
-  }
-  /// counting all count of result -> to count percent
-  getAllCountOfResult() {
-    return Object.values(this.result).reduce((a, b) => a + b)
-  }
-  // counting percent of length voting --> BUG
-  getPercentOfDeck(count: number) {
-    return ((count / this.getAllCountOfResult() * 100))
-  }
+
   // handle button invite friend
   onHandleInviteFriend() {
     this.dialog.open(InviteFriend)
@@ -487,9 +478,9 @@ export class GameTableComponent implements OnInit {
     })
   }
   onRemoveAllIssue(){
-
-    
-
     this.issues_arr = []
+    this.issueService.deleteIssue(this.id!).subscribe( _ => {
+      
+    })
   }
 } 

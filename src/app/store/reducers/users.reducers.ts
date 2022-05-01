@@ -1,6 +1,6 @@
 import { state } from "@angular/animations";
 import { createReducer, on } from "@ngrx/store";
-import { userSignAction, userLoginError, userLogoutAction, userSpectatorModeAction } from '../actions/users.action';
+import { userSignAction, userLoginError, userLogoutAction, userSpectatorModeAction, refreshTokenAction } from '../actions/users.action';
 
 
 export interface UserState {
@@ -30,4 +30,10 @@ export const authReducer = createReducer(
             ...state.auth,
             spectorMode: payload
         }})
-    }))
+    }), 
+    on(refreshTokenAction, (state,  {payload} ) => {
+        return ({...state, auth: {
+            ...state.auth,
+            token: payload
+        }})
+    })  )
