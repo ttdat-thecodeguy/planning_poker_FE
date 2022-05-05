@@ -1,0 +1,26 @@
+<div class="dig">
+    <form class="dialog-form">
+        <div>
+            <h1 mat-dialog-title class="text-center">Import from Urls</h1>
+            <span class="btn-close-dialog" [mat-dialog-close]>&#x2715;</span>
+        </div> 
+        <div>
+            <p>Paste your issues'urls in the box below to add them into the game.</p>
+            <p>Each valid url will create a new ticket.</p>
+            <p>Please paste each url in a new line.</p>
+        </div>
+        <mat-form-field  appearance="outline">
+            <mat-label>Issues's Input</mat-label>
+            <textarea (ngModelChange)="onChangeIssueInput($event)" [(ngModel)]="data"  name="issue-urls" matInput cols="30" rows="10"></textarea>
+        </mat-form-field>
+        <div class="d-inline-block">
+            <div class="float-right">
+                <button type="submit" color="white" class="mr-2 pt-2 pb-2 pr-4 pl-4 urls-btn" [mat-dialog-close] mat-flat-button>Cancel</button>
+                <button type="submit" color="primary" [disabled]="urls.length === 0 ? true : false"  class="pt-2 pb-2 pr-4 pl-4 urls-btn" (click)="onImportIssue()"  mat-flat-button>
+                    Add {{ urls.length }} Issue(s)
+                </button>
+            </div>
+        </div>
+        
+    </form>
+</div>

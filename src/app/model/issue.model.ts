@@ -3,5 +3,6 @@ export interface Issue{
     name: string,
     link: string,
     description: string,
-    storyPoint: string
+    storyPoint: string,
+    isSelected?: boolean
 }

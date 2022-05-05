@@ -240,6 +240,14 @@ export class GameTableComponent implements OnInit {
         case 'START_NEW_VOTE_WITH_ISSUE':
 
           break
+        case 'IMPORT_FROM_CSV':
+          dataReceive =  JSON.parse(c.content);          
+          dataReceive.forEach((item : Issue) => {
+            this.issues_arr.push(item)
+          })
+          break       
+        case 'IMPORT_FROM_URLS':
+            break
         default:
           break;
       }
@@ -475,6 +483,19 @@ export class GameTableComponent implements OnInit {
     })
     dRefImportIssue.afterClosed().subscribe(res => {
       this.issues_arr.push(...res.item)
+  onUploadByUrls(){
+    let uploadByUrls = this.dialog.open(ImportIssueAsUrlsComponent);
+    uploadByUrls.afterClosed().subscribe(res => {
+      // id phải thêm từ back
+      res.data.forEach((item : string) => {
+        this.issues_arr.push({
+          id: item,
+          name: item,
+          link: item,
+          description: '',
+          storyPoint: ''
+        })
+      })
     })
   }
   onRemoveAllIssue(){

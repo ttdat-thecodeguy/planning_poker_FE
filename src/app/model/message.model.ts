@@ -4,5 +4,6 @@ export interface Message{
     messageType: string,
     sender: number, 
     content: string,
-    table: string
+    table: string,
+    storyPoint? : string
 }

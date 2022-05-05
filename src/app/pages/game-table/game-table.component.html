@@ -19,7 +19,7 @@
           <span class="btn-close-dialog cursor-pointer" (click)="drawer.close()">&#x2715;</span>
           <div class="dropdown-menu" aria-labelledby="triggerId">
             <a class="dropdown-item" href="#">Import from Jira</a>
-            <a class="dropdown-item" href="#">Import from Urls</a>
+            <button class="dropdown-item" (click)="onUploadByUrls()">Import from Urls</button>
             <button class="dropdown-item" (click)="onOpenUploadAsCSV()">Import from CSV</button>
           </div>
         </div>

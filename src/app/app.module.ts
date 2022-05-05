@@ -32,6 +32,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GameTableComponent } from './pages/game-table/game-table.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ResultsComponent } from './components/results/results.component';
+import { ImportIssueAsUrlsComponent } from './shards/dialog/import-issue-as-urls/import-issue-as-urls.component';
 
 
 
@@ -47,7 +48,7 @@ import { ResultsComponent } from './components/results/results.component';
     SigninAsGuestDialog,
     SignUpDialog,
     LoginDialog,
-
+    ImportIssueAsUrlsComponent,
     
     /* Component */
     NewGameComponent,
