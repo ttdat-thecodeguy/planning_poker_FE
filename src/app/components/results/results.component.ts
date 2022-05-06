@@ -6,24 +6,33 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css'],
 
-  // animations: [
-  //   trigger('flow' , [
-  //     state('appear', style({
-  //       transform: 'translateY(40px)',
-  //       opacity: 0.4
-  //     })),
-  //     state('ready', style({
-  //       transform: 'translateY(0)',
-  //       opacity: 1
-  //     })),
-  //     transition('appear => ready', [
-  //       animate('0.4s')
-  //     ]),
-  //     transition('ready => appear', [
-  //       animate('0.4s')
-  //     ])
-  //   ])
-  // ]
+  animations: [
+    trigger('flow' , [
+      // state('appear', style({
+      //   transform: 'translateY(40px)',
+      //   opacity: 0.4
+      // })),
+      // state('ready', style({
+      //   transform: 'translateY(0)',
+      //   opacity: 1
+      // })),
+      
+      transition(':enter', [
+        style({
+          transform: 'translateY(40px)',
+          opacity: 0.4
+        }),
+        animate('0.4s', style({transform: 'translateY(0)', opacity : 1}))
+      ]), 
+      transition(':leave', [
+        animate('0.4s', style({
+          transform: 'translateY(40px)',
+          opacity: 0.4
+        }))
+      ])
+
+    ])
+  ]
 
 })
 export class ResultsComponent implements OnInit {
