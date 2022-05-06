@@ -33,7 +33,7 @@ export class NewGameComponent implements OnInit {
     this.tableService.createTable(data).subscribe(
     item => {
       ///send name to link as state
-      this.router.navigate(['/table', item.id], { state : { tableName : data.name === '' ? item.name : data.name } })
+      this.router.navigate(['/table', item.id])
     })
   }
 

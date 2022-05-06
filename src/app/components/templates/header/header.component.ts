@@ -40,9 +40,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // get data when router change
     this.router.events.subscribe(( _ ) => {
-      if(this.router.getCurrentNavigation()?.extras.state !== undefined){       
-        this.tableName = this.router.getCurrentNavigation()?.extras.state!['tableName'] 
-      } if(this.loc.path() != ''){
+       if(this.loc.path() != ''){
         this.route = this.loc.path();
       } else {
         this.route = 'dashboard'
