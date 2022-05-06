@@ -19,6 +19,7 @@ import { InviteFriend } from 'src/app/shards/dialog/invite-friend/invite-friend.
 import { ImportIssueAsCSVDialog } from 'src/app/shards/dialog/import-issue-as-csv/import-issue-as-csv.dialog';
 import { getAuthSpectorMode } from 'src/app/store/selectors/users.selectors';
 import { UserService } from 'src/app/service/users.service';
+import { ImportIssueAsUrlsComponent } from 'src/app/shards/dialog/import-issue-as-urls/import-issue-as-urls.component';
 
 /* Game Table */
 @Component({
@@ -55,9 +56,12 @@ export class GameTableComponent implements OnInit {
   issueForm = new FormGroup({
     title: new FormControl("")
   })
+  activeIssue? : Issue
+  
+  
+
   //// thống kê
   result: { [point: string]: number } = {};
-
   constructor(private HtmlElement: ElementRef,
     private dialog: MatDialog,
     private route: ActivatedRoute,
@@ -77,7 +81,6 @@ export class GameTableComponent implements OnInit {
       if (data !== null) {
         this.$auth = JSON.parse(data)
       }
-      console.log(this.$auth)
       if (this.$auth === undefined) {
         this.store.select('auth')
           .subscribe(item => {
@@ -85,7 +88,7 @@ export class GameTableComponent implements OnInit {
             this.$auth = item.auth
           })
       }
-      //theo dõi trạng thái của auth spector mode
+      //theo dõi trạng thái của auth spector mode bằng selectors
       this.store.pipe(select(getAuthSpectorMode)).subscribe(item => {
         if (item !== null && item !== undefined && this.stompClient !== undefined) {
           //require location of this user deck 
@@ -115,8 +118,6 @@ export class GameTableComponent implements OnInit {
           this.issues_arr = resp
         })
         this.voting_sys_arr = this.t.voting.split(',')
-
-        console.log(resp)
       })
       //// mở dialog sau
       if (isEmpty(this.$auth)) {
@@ -172,6 +173,16 @@ export class GameTableComponent implements OnInit {
         case 'JOIN':
           dataReceive = JSON.parse(c.content);
           this.showDeckOnTable(dataReceive)
+          console.log(dataReceive)
+          let id = dataReceive[0].tuple[2];
+          let name = dataReceive[0].tuple[3];
+          if(id){
+            this.activeIssue = {
+              id,
+              name 
+            }
+          } 
+          
           break;
         case 'LEAVE':
           console.log("Call Message Leave");
@@ -220,8 +231,11 @@ export class GameTableComponent implements OnInit {
         case 'SHOW_CARD':
           dataReceive = JSON.parse(c.content);
           this.isDone = true
-          this.result = dataReceive;
-
+          this.onBuildResult(dataReceive)
+          if(c.storyPoint) {
+            let idx = this.issues_arr.findIndex(i => i.id === c.issue)
+            this.issues_arr[idx].storyPoint = c.storyPoint
+          }
           var targets = (<HTMLElement>this.HtmlElement.nativeElement).querySelectorAll('.deck-unflip');
           targets.forEach(item => {
             item.classList.add('is-flipped')
@@ -237,9 +251,22 @@ export class GameTableComponent implements OnInit {
           this.isDone = false
           this.initTable()
           break
-        case 'START_NEW_VOTE_WITH_ISSUE':
-
+          
           break
+        case 'ADD_ISSUE':
+          dataReceive = JSON.parse(c.content)
+          this.issues_arr.push(dataReceive)
+          break;
+        case 'SELECTED_ISSUE':
+          dataReceive = JSON.parse(c.content)
+          this.activeIssue = dataReceive 
+          break;
+        case 'UNSELECTED_ISSUE':
+          this.activeIssue = undefined
+          break
+        case 'DELETE_ALL_ISSUE':
+            this.issues_arr = []
+            break;
         case 'IMPORT_FROM_CSV':
           dataReceive =  JSON.parse(c.content);          
           dataReceive.forEach((item : Issue) => {
@@ -247,7 +274,9 @@ export class GameTableComponent implements OnInit {
           })
           break       
         case 'IMPORT_FROM_URLS':
-            break
+          dataReceive = JSON.parse(c.content);
+          this.issues_arr.push(...dataReceive);  
+          break
         default:
           break;
       }
@@ -314,25 +343,14 @@ export class GameTableComponent implements OnInit {
       }
     }
   }
-  /* build the result */
-  onBuildResult() {
-    let deck_result: { [point: string]: number } = {}
-
-    for (let i = 0; i < this.game_play.length; i++) {
-      for (let j = 0; j < this.game_play[i].length; j++) {
-        let deck = this.game_play[i][j];
-
-        if (deck.point !== undefined) {
-          if (deck.point in deck_result) {
-            let data = deck_result[deck.point] + 1;
-            deck_result[deck.point] = data;
-          } else {
-            deck_result[deck.point] = 1;
-          }
-        }
-      }
-    }
-    this.result = deck_result;
+  /* build the result   */
+  onBuildResult(dataReceive : any) {
+    this.result = {};
+    dataReceive.forEach((item : any) => {
+      let data = item.tuple[0];
+      let point = item.tuple[1];
+      this.result[point] = data;
+    })
   }
   iS: number = 0
   jS: number = 0
@@ -385,14 +403,10 @@ export class GameTableComponent implements OnInit {
     }
   }
   /* when click reveal / show cards button */
-  onHandleReveal() {
+  onHandleReveal() {   
     let timer_end = 3;
     this.tick = 3;
-
-    /// build result
-    this.onBuildResult()
     // set flag
-
     /// query selector 
     let decks = (<HTMLElement>this.HtmlElement.nativeElement).querySelectorAll('#decklist .deck');
     decks.forEach(item => {
@@ -422,10 +436,8 @@ export class GameTableComponent implements OnInit {
           sender: this.$auth?.id,
           messageType: 'SHOW_CARD',
           table: this.t?.id,
-          content: JSON.stringify(this.result)
+          issue: this.activeIssue?.id
         }))
-
-
         var targets = (<HTMLElement>this.HtmlElement.nativeElement).querySelectorAll('.deck-unflip');
         targets.forEach(item => {
           item.classList.add('is-flipped')
@@ -454,7 +466,6 @@ export class GameTableComponent implements OnInit {
     this.isDone = false
     this.initTable()
 
-
     this.stompClient.send("/app/start-new-vote", {}, JSON.stringify({
       sender: this.$auth?.id,
       messageType: 'START_NEW_VOTE',
@@ -463,45 +474,87 @@ export class GameTableComponent implements OnInit {
     }))
   }
   /* Handle Issue Side */
+
+  //get item from emit
+  setActiveIssue(item : Issue){
+    this.tableService.updateTableIssue(this.id!, item.id, item.isSelected!).subscribe(_ =>{
+      if( this.activeIssue !== undefined && this.activeIssue.id === item.id){
+        this.activeIssue = undefined
+  
+        this.stompClient.send("/app/unselected-issue", {}, JSON.stringify({
+          sender: this.$auth?.id,
+          messageType: 'UNSELECTED_ISSUE',
+          table: this.t?.id,
+        }))
+      } else{
+        this.activeIssue = item;
+        this.stompClient.send("/app/selected-issue", {}, JSON.stringify({
+          sender: this.$auth?.id,
+          messageType: 'SELECTED_ISSUE',
+          table: this.t?.id,
+          content: JSON.stringify(item)
+        }))
+      }
+      /// send data
+    })
+  }
   onOpenAddIssue() {
     this.isIssueOpen = true;
   }
   onCloseIssue() {
     this.isIssueOpen = false;
   }
+  // save issue
   onSaveIssue() {
     let titleIssue = this.issueForm.value.title;
     this.issueService.addIssue(titleIssue, null, null, null, this.id!).subscribe(resp => {
-      this.issues_arr.push(resp);
+      this.stompClient.send("/app/add-issue", {}, JSON.stringify({
+        sender: this.$auth?.id,
+        messageType: 'ADD_ISSUE',
+        table: this.t?.id,
+        content: JSON.stringify(resp)
+      }))
     });
-
     this.onCloseIssue();
   }
+  /// upload as csv
   onOpenUploadAsCSV() {
     let dRefImportIssue = this.dialog.open(ImportIssueAsCSVDialog, {
       data: this.id
     })
     dRefImportIssue.afterClosed().subscribe(res => {
-      this.issues_arr.push(...res.item)
+      // this.issues_arr.push(...res.item)
+      this.stompClient.send("/app/import-from-csv", {}, JSON.stringify({
+        sender: this.$auth?.id,
+        messageType: 'IMPORT_FROM_CSV',
+        table: this.t?.id,
+        content: JSON.stringify(res.item)
+      }))
+    })
+  }
+  /// upload by urls
   onUploadByUrls(){
     let uploadByUrls = this.dialog.open(ImportIssueAsUrlsComponent);
     uploadByUrls.afterClosed().subscribe(res => {
-      // id phải thêm từ back
-      res.data.forEach((item : string) => {
-        this.issues_arr.push({
-          id: item,
-          name: item,
-          link: item,
-          description: '',
-          storyPoint: ''
-        })
+      this.issueService.importIssueAsUrls(res.data, this.id!).subscribe(item => {
+        this.stompClient.send("/app/import-from-urls", {}, JSON.stringify({
+          sender: this.$auth?.id,
+          messageType: 'IMPORT_FROM_URLS',
+          table: this.t?.id,
+          content: JSON.stringify(item)
+        }))
       })
     })
   }
+  /// handle remove all issue
   onRemoveAllIssue(){
-    this.issues_arr = []
     this.issueService.deleteIssue(this.id!).subscribe( _ => {
-      
+      this.stompClient.send("/app/delete-issue", {}, JSON.stringify({
+        sender: this.$auth?.id,
+        messageType: 'DELETE_ALL_ISSUE',
+        table: this.t?.id,
+      }))
     })
+    
   }
 } 

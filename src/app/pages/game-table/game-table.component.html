@@ -1,9 +1,10 @@
-
 <mat-drawer-container class="sidenav-container" autosize="true">
   <mat-drawer #drawer class="sidenav" mode="side" [position]="'end'">
     <div class="issues-header">
       <div class="issues-header-left">
         <h3>Issues</h3>
+        <h5  style="font-weight: 100;">{{ activeIssue !== undefined ?   'Voting: ' + activeIssue!.name : ''  }}</h5>
+
       </div>
       <div class="issues-header-right">
         
@@ -27,12 +28,14 @@
     </div>
 
     <div class="issues-main">
-
-
       <div class="issue-container">
+
         <ng-container *ngFor="let issue of issues_arr">
-          <issue [issue]="issue"></issue>
+          
+          <issue [issue]="issue" [isSelectedIssue]="activeIssue !== undefined ? activeIssue.id === issue.id ? true : false : false"  (itemEvent)="setActiveIssue($event)" ></issue>
+
         </ng-container>
+
         <div class="mt-3">
           <ng-container *ngIf="isIssueOpen === true">
             <form (submit)="onSaveIssue()" [formGroup]="issueForm" >
@@ -67,6 +70,7 @@
 <button type="button" class="btn-fc" mat-button (click)="onOpenInvitePeople()">
  <i class="fa fa-user-plus" aria-hidden="true"></i>
 </button>
+
 
 <div class="timer">
   <button class="btn-icon">
@@ -108,6 +112,7 @@
 
     <div class="table">
       <div class="table-items-container">
+        <h5>{{t.name}}</h5>
         <ng-container *ngIf="selected === undefined && isDone === false">
           <p>Pick up your cards</p>
         </ng-container>
@@ -172,7 +177,7 @@
     <ng-container *ngIf="isDone === true">
       
 
-<!-- 
+        <!-- 
         <div>
           <h4>Average</h4>
           <p>6.5</p>

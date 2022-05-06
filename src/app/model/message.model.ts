@@ -6,4 +6,5 @@ export interface Message{
     content: string,
     table: string,
     storyPoint? : string
+    issue? : string
 }
