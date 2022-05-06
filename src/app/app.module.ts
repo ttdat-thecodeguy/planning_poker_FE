@@ -39,6 +39,10 @@ import { ImportIssueAsUrlsComponent } from './shards/dialog/import-issue-as-urls
 
 @NgModule({
   declarations: [
+
+    /// TODO share modules
+    /// TODO check result
+
     AppComponent,
     /* Dialog */
     CustomDeckDialog,
