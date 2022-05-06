@@ -1,26 +1,27 @@
-<div class="issue-box mb-2" *ngIf="issue !== undefined" >
-    <h5>{{ issue.id }}</h5>
-    <p>{{ issue.name }}</p>
+<!-- <div class="story_point-box">
+    <div class="item1">1</div>
+    <div class="item2">2</div>
+    <div class="item3">3</div>
+    <div class="item4">4</div>
+    <div class="item5">5</div>
+    <div class="item6">6</div>
+    <div class="item7">7</div>
+    <div class="item8">8</div>
+</div> -->
+<div class="issue-box mb-2 card" [ngClass]="isSelectedIssue ? 'selected-box' : ''" *ngIf="issue !== undefined">
+    <h5 style="overflow: visible;">{{ issue.id }}</h5>
+    <p style="overflow: visible;">{{ issue.name }}</p>
     <div class="d-inline-block w-100">
-        <button type="button" color="accent" class="float-left" mat-flat-button>
-            Vote this issue
+        <button type="button" color="accent" (click)="onVotingIssue()" [ngClass]="isSelectedIssue ? 'selected-btn' : ''"
+            class="float-left" mat-flat-button>
+            {{ isSelectedIssue ? 'Voting now...' : 'Voting this issue' }}
         </button>
 
         <button type="button" color="accent" class="ml-2" mat-flat-button (click)="onOpenIssueDetails()">
             See Details
         </button>
-
-        <!-- <mat-form-field appearance="outline" >
-         
-            <mat-select  mat-stroked-button>
-              <mat-option>1</mat-option>
-              <mat-option>2</mat-option>
-              <mat-option>4</mat-option>
-            </mat-select>
-          </mat-form-field> -->
-       
         <button type="button" color="secondary" class="float-right" mat-stroked-button>
-            {{ point === '' || point === null || point === undefined ? "-" : point }}
+            {{ issue.storyPoint ? issue.storyPoint : '-' }}
         </button>
     </div>
 </div>

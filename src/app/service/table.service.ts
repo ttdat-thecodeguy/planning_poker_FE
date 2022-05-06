@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { catchError, EMPTY, NotFoundError, Observable, throwError } from "rxjs";
 import { Table } from "../model/table.model";
 import { API_URL } from "../model/constants/constants"
+import { Issue } from "../model/issue.model";
 @Injectable({
     providedIn: 'root',
 })
@@ -27,5 +28,14 @@ export class TableService {
             userId
         }
         return this.http.patch<Table>(`${API_URL}/table/update-owner`, data, this.httpOptions);
+    }
+
+    updateTableIssue(tableId : string, issueId : string, isAdd : boolean) : Observable<Issue>{
+        let data = {
+            tableId,
+            issueId,
+            isAdd
+        }
+        return this.http.patch<Issue>(`${API_URL}/table/update-issue`, data, this.httpOptions);
     }
 }

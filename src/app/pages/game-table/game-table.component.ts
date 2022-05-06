@@ -19,6 +19,7 @@ import { InviteFriend } from 'src/app/shards/dialog/invite-friend/invite-friend.
 import { ImportIssueAsCSVDialog } from 'src/app/shards/dialog/import-issue-as-csv/import-issue-as-csv.dialog';
 import { getAuthSpectorMode } from 'src/app/store/selectors/users.selectors';
 import { UserService } from 'src/app/service/users.service';
+import { ImportIssueAsUrlsComponent } from 'src/app/shards/dialog/import-issue-as-urls/import-issue-as-urls.component';
 
 /* Game Table */
 @Component({
@@ -55,9 +56,12 @@ export class GameTableComponent implements OnInit {
   issueForm = new FormGroup({
     title: new FormControl("")
   })
+  activeIssue? : Issue
+  
+  
+
   //// thống kê
   result: { [point: string]: number } = {};
-
   constructor(private HtmlElement: ElementRef,
     private dialog: MatDialog,
     private route: ActivatedRoute,
@@ -77,7 +81,6 @@ export class GameTableComponent implements OnInit {
       if (data !== null) {
         this.$auth = JSON.parse(data)
       }
-      console.log(this.$auth)
       if (this.$auth === undefined) {
         this.store.select('auth')
           .subscribe(item => {
@@ -85,7 +88,6 @@ export class GameTableComponent implements OnInit {
             this.$auth = item.auth
           })
       }
-      //theo dõi trạng thái của auth spector mode
       this.store.pipe(select(getAuthSpectorMode)).subscribe(item => {
         if (item !== null && item !== undefined && this.stompClient !== undefined) {
           //require location of this user deck 
@@ -115,8 +117,6 @@ export class GameTableComponent implements OnInit {
           this.issues_arr = resp
         })
         this.voting_sys_arr = this.t.voting.split(',')
-
-        console.log(resp)
       })
       //// mở dialog sau
       if (isEmpty(this.$auth)) {
@@ -172,6 +172,16 @@ export class GameTableComponent implements OnInit {
         case 'JOIN':
           dataReceive = JSON.parse(c.content);
           this.showDeckOnTable(dataReceive)
+          console.log(dataReceive)
+          let id = dataReceive[0].tuple[2];
+          let name = dataReceive[0].tuple[3];
+          if(id){
+            this.activeIssue = {
+              id,
+              name 
+            }
+          } 
+          
           break;
         case 'LEAVE':
           console.log("Call Message Leave");

@@ -31,6 +31,11 @@ export class IssueService {
         formData.append("file", file, file.name)
         return this.http.post<Issue[]>(`${API_URL}/issue/import-as-csv?tableId=${tableId}&isIncludeHeader=${isIncludeHeader}`, formData);
     }
+
+    importIssueAsUrls(urls : string[], tableId : string) : Observable<Issue[]>{
+        return this.http.post<Issue[]>(`${API_URL}/issue/import-as-urls?tableId=${tableId}`, urls, this.httpOptions)
+    }
+
     deleteIssue(tableId : string) : Observable<any>{
         return this.http.delete(`${API_URL}/issue/delete-all?tableId=${tableId}`)
     }
