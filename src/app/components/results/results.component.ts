@@ -19,6 +19,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
       
       transition(':enter', [
         style({
+          
           transform: 'translateY(40px)',
           opacity: 0.4
         }),

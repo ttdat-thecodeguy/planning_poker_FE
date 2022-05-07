@@ -172,14 +172,12 @@ export class GameTableComponent implements OnInit {
       switch (c.messageType) {
         case 'JOIN':
           dataReceive = JSON.parse(c.content);
-          this.showDeckOnTable(dataReceive)
-          console.log(dataReceive)
-          let id = dataReceive[0].tuple[2];
-          let name = dataReceive[0].tuple[3];
-          if(id){
+          this.showDeckOnTable(dataReceive)         
+          let issue : Issue = dataReceive[0].gameTable.issueActive;
+          if(issue){
             this.activeIssue = {
-              id,
-              name 
+              id: issue.id,
+              name: issue.name
             }
           } 
           
@@ -309,12 +307,12 @@ export class GameTableComponent implements OnInit {
     let table: any[] = [[], [], [], []]
     for (let i = 0; i < dataReceive.length; i++) {
       deck = new DeckComponent()
-      deck.isFlip = dataReceive[i].tuple[0].isFlip;
-      deck.userOwner = dataReceive[i].tuple[0].id.userId;
-      deck.userOwnerName = dataReceive[i].tuple[1];
-      deck.SpectatorMode = dataReceive[i].tuple[0].isSpectator
-      if (dataReceive[i].tuple[0].item !== undefined) {
-        deck.point = dataReceive[i].tuple[0].item.trim();
+      deck.isFlip = dataReceive[i].isFlip;
+      deck.userOwner = dataReceive[i].user.id;
+      deck.userOwnerName = dataReceive[i].user.displayName;
+      deck.SpectatorMode = dataReceive[i].isSpectator
+      if (dataReceive[i].item !== undefined) {
+        deck.point = dataReceive[i].item.trim();
       }
       table[j].push(deck)
       j++;
@@ -346,9 +344,9 @@ export class GameTableComponent implements OnInit {
   /* build the result   */
   onBuildResult(dataReceive : any) {
     this.result = {};
-    dataReceive.forEach((item : any) => {
-      let data = item.tuple[0];
-      let point = item.tuple[1];
+    dataReceive.forEach((deckResult : any) => {
+      let data = deckResult.count;
+      let point = deckResult.item;
       this.result[point] = data;
     })
   }
