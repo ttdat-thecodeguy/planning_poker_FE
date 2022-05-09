@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { isEmpty, isNumber } from 'lodash';
 
 @Component({
   selector: 'app-results',
@@ -48,6 +49,21 @@ export class ResultsComponent implements OnInit {
   @Input() result: { [point: string]: number } = {};
 
 
+  getAvgOfResultIfAllNumber(){
+    let r = 0.0;
+    let arr = Object.keys(this.result);
+    for(let key of arr){
+      if(!isNaN(parseInt(key))  ){
+        r += Number(key) * this.result[key];
+      } else{
+        return undefined;
+      }
+    }
+    return r / this.getAllCountOfResult();
+  }
+  isEmpty(value : any){
+    return isEmpty(value)
+  }
   rechangeDictToArr() {
     return Object.keys(this.result)
   }

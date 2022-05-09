@@ -209,7 +209,9 @@ export class GameTableComponent implements OnInit {
 
           break;
         case 'LEAVE':
-          console.log('Call Message Leave');
+          if(c.userOwnerLeave !== undefined && c.userOwnerLeave === true){
+            this.t.isShowCardByOwner = false
+          } 
           this.onRemoveItemInTable(c.sender);
           break;
         case 'SELECTED':
@@ -286,6 +288,7 @@ export class GameTableComponent implements OnInit {
           break;
         case 'DELETE_ALL_ISSUE':
           this.issues_arr = [];
+          this.activeIssue = undefined;
           break;
         case 'IMPORT_FROM_CSV':
           dataReceive = JSON.parse(c.content);

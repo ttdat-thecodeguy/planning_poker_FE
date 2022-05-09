@@ -7,4 +7,7 @@ export interface Message{
     table: string,
     storyPoint? : string
     issue? : string
+
+
+    userOwnerLeave? : boolean
 }
