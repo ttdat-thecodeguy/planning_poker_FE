@@ -122,6 +122,8 @@ export class GameTableComponent implements OnInit {
               JSON.stringify(dataSender)
             );
           }
+          this.isSpectatorMode = item;
+
         }
       });
 
@@ -312,7 +314,6 @@ export class GameTableComponent implements OnInit {
       this.game_play[x][y].isFlip = false;
       this.game_play[x][y].point = undefined;
     }
-    this.isSpectatorMode = true;
   }
   onDeactiveSpectatorMode(x : number, y: number){
     if (this.game_play[x][y] !== undefined) {
@@ -320,7 +321,6 @@ export class GameTableComponent implements OnInit {
       this.game_play[x][y].isFlip = false;
       this.game_play[x][y].point = undefined;
     }
-    this.isSpectatorMode = false;
   }
   onFindLocationOfDeck(sender: number) {
     let iS = -1,
@@ -372,6 +372,7 @@ export class GameTableComponent implements OnInit {
   }
   /* button deactivate when spectator mode is on */
   onDeativateSpectator() {
+    this.isSpectatorMode = false;
     this.userService.activeSpectatorMode(false);
   }
   /* init all table when start new voting */
