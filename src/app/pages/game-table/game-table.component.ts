@@ -49,6 +49,9 @@ export class GameTableComponent implements OnInit {
 
   // another varibales
   selected?: string;
+  countUserSelected: number = 0;
+
+
   stompClient: any;
   isDone: boolean = false;
 
@@ -224,6 +227,7 @@ export class GameTableComponent implements OnInit {
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = item;
             this.game_play[x][y].isFlip = true;
+            this.countUserSelected += 1;
           }
           // this.game_play[]
           break;
@@ -234,6 +238,7 @@ export class GameTableComponent implements OnInit {
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = undefined;
             this.game_play[x][y].isFlip = false;
+            this.countUserSelected -= 1;
           }
           break;
         case 'ACTIVE_SPECTATOR':
