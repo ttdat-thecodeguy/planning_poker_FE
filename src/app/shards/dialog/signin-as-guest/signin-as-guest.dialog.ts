@@ -1,7 +1,8 @@
-import { Component, Inject } from "@angular/core"
+import { Component, Inject, OnInit } from "@angular/core"
 import { FormControl, FormGroup } from "@angular/forms"
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog"
 import { Store } from "@ngrx/store"
+import { isEmpty } from "lodash"
 import { UserService } from "src/app/service/users.service"
 import { userSignAction } from "src/app/store/actions/users.action"
 import { SignUpDialog } from "../signup/signup.dialog"
@@ -11,7 +12,7 @@ import { SignUpDialog } from "../signup/signup.dialog"
     selector: 'signin-as-guest-dialog',
     templateUrl: './signin-as-guest.dialog.html'
   })
-  export class SigninAsGuestDialog {
+  export class SigninAsGuestDialog{
     constructor(private dialog : MatDialog, 
                 private userService : UserService,  
                 private dRef : MatDialogRef<SigninAsGuestDialog>, 
@@ -20,19 +21,17 @@ import { SignUpDialog } from "../signup/signup.dialog"
     
     signUpAsGuestForm = new FormGroup({
       display_name : new FormControl(null),
-      isSpector : new FormControl(false)
+      isSpectator : new FormControl(false)
     })
   
     onLogin(){
       this.dialog.open(SignUpDialog)
     }
+    
   
-    onSignUpAsGuestSubmit(){
-      // console.log(this.tableId)
-      
+    onSignUpAsGuestSubmit(){      
       let form_data = this.signUpAsGuestForm.value
-  
-      this.userService.signupAsGuest(form_data.display_name, this.tableId, form_data.isSpector ).subscribe(
+      this.userService.signupAsGuest(form_data.display_name, this.tableId, form_data.isSpectator ).subscribe(
         item => {
           this.store.dispatch(userSignAction({ payload: item }))
           // không lưu storage với user guest

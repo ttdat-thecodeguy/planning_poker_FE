@@ -1,4 +1,4 @@
-<div  class="d-flex" @flow>
+<div *ngIf="!isEmpty(result)" class="d-flex" @flow>
   <ng-container *ngFor="let key of rechangeDictToArr()">
     <div class="card-result">
       <div
@@ -23,9 +23,9 @@
   </ng-container>
 
   
-    <div>
+    <div *ngIf="getAvgOfResultIfAllNumber() !== undefined">
       <h4>Average</h4>
-      <p>6.5</p>
+      <p>{{ getAvgOfResultIfAllNumber() }}</p>
       <h4>Agreement:</h4>
       <div class="robot-emoji">
         <div class="agree-status"></div>

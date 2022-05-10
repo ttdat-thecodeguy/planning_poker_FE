@@ -25,6 +25,7 @@ export class TokenInterceptorService implements HttpInterceptor {
     }
 
     if(!isEmpty($auth)){
+      //// yêu cầu interceptor không thêm bear token trong url refresh token
       if(!req.url.includes('refresh-token')){
         req = req.clone({
           setHeaders: {
@@ -35,9 +36,6 @@ export class TokenInterceptorService implements HttpInterceptor {
     } 
     return next.handle(req).pipe(
       catchError((err) => {
-
-        console.log(err)
-
         switch(err.status) {
           case 401:
             this.userService.logOut();
