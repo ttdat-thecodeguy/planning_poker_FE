@@ -113,14 +113,14 @@
     <div class="table">
       <div class="table-items-container">
         <h5>{{t.name}}</h5>
-        <ng-container *ngIf="countUserSelected === 0 && isDone === false">
+        <ng-container *ngIf="countCardSelected === 0 && isDone === false">
           <p>Pick up your cards</p>
         </ng-container>
 
-        <ng-container *ngIf="countUserSelected !== 0">
+        <ng-container *ngIf="countCardSelected !== 0">
           <ng-container *ngIf="isDone === false">
-
             <ng-container *ngIf="tick === -1">
+
               <ng-container *ngIf="t.isShowCardByOwner === false">
                 <button class="p-2" mat-flat-button color="primary" (click)="onHandleReveal()">Reveal Cards</button>
               </ng-container>
@@ -128,11 +128,9 @@
               <ng-container *ngIf="t.isShowCardByOwner === true">
                 <button *ngIf="t.userOwerId === $auth?.id" class="p-2" mat-flat-button color="primary" (click)="onHandleReveal()">Reveal Cards</button>
                 <p *ngIf="t.userOwerId !== $auth?.id">voting in progress</p>
-              </ng-container>         
-            </ng-container>
-           
-            
+              </ng-container>  
 
+            </ng-container>
             <ng-container *ngIf="tick !== -1">
               <h4 class="text-primary">{{tick}}</h4>
             </ng-container>

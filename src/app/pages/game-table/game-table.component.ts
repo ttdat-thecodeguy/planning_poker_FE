@@ -49,7 +49,7 @@ export class GameTableComponent implements OnInit {
 
   // another varibales
   selected?: string;
-  countUserSelected: number = 0;
+  countCardSelected : number = 0;
 
 
   stompClient: any;
@@ -170,7 +170,7 @@ export class GameTableComponent implements OnInit {
     this.stompClient = Stomp.over(socket);
     const _this = this;
     // connect
-    // _this.stompClient.debug = null; // remove or add this line in future
+    _this.stompClient.debug = null; // remove or add this line in future
 
     _this.stompClient.connect({}, function () {
       // subscribe
@@ -211,7 +211,6 @@ export class GameTableComponent implements OnInit {
               name: issue.name,
             };
           }
-
           break;
         case 'LEAVE':
           if(c.userOwnerLeave !== undefined && c.userOwnerLeave === true){
@@ -227,9 +226,8 @@ export class GameTableComponent implements OnInit {
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = item;
             this.game_play[x][y].isFlip = true;
-            this.countUserSelected += 1;
           }
-          // this.game_play[]
+          this.coutingCardSelected();
           break;
         case 'UNSELECTED_CARD':
           /// remove all space and split
@@ -238,8 +236,9 @@ export class GameTableComponent implements OnInit {
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = undefined;
             this.game_play[x][y].isFlip = false;
-            this.countUserSelected -= 1;
+            
           }
+          this.coutingCardSelected();
           break;
         case 'ACTIVE_SPECTATOR':
           /// remove all space and split
@@ -278,6 +277,7 @@ export class GameTableComponent implements OnInit {
           });
 
           this.isDone = false;
+          this.countCardSelected = 0;
           this.initTable();
           break;
 
@@ -313,6 +313,18 @@ export class GameTableComponent implements OnInit {
     }
   }
   //// User function
+  coutingCardSelected(){
+    this.countCardSelected = 0;
+    for (let i = 0; i < this.game_play.length; i++) {
+      for (let j = 0; j < this.game_play[i].length; j++) {
+        if (this.game_play[i][j].point !== undefined) {        
+          this.countCardSelected += 1;
+        }
+      }
+    }
+  }
+
+
   onActiveSpectatorMode(x: number, y: number) {
     if (this.game_play[x][y] !== undefined) {
       this.game_play[x][y].SpectatorMode = true;
@@ -659,4 +671,7 @@ export class GameTableComponent implements OnInit {
       );
     });
   }
+
+  
+
 }
