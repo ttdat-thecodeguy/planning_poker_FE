@@ -25,7 +25,7 @@ import { LoginDialog } from "../login/login.dialog"
       displayName: new FormControl(''),
       terms : new FormControl(false)
     })
-  
+    
     constructor(private userService : UserService, private store: Store<{ auth: any }>,  private dRef : MatDialogRef<SignUpDialog>, private dialog : MatDialog){}
   
     err : UserSignError = {

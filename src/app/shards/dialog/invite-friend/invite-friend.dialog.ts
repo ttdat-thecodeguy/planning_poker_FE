@@ -1,5 +1,6 @@
 import { Component, ElementRef, Inject, ViewChild } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {Clipboard} from '@angular/cdk/clipboard';
 
 /* Invite Friend */
 @Component({
@@ -8,12 +9,14 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
   })
   export class InviteFriend {
     // get data from table page
-    constructor(@Inject(MAT_DIALOG_DATA) public tableId : string) {}
-    @ViewChild('gameUrl') gameUrl? : HTMLInputElement; 
+    constructor(@Inject(MAT_DIALOG_DATA) public tableId : string, private clipboard : Clipboard) {}
+  @ViewChild('gameUrl',{static : false}) gameUrl? : ElementRef; 
 
     invitationValue = window.location.href;
 
     onCopyLink(){
-      this.gameUrl!.select()
+      const ip = <HTMLInputElement>this.gameUrl?.nativeElement;
+      ip.select()
+      this.clipboard.copy(this.invitationValue);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     }
   }
