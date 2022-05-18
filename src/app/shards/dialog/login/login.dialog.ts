@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
@@ -20,6 +20,9 @@ export class LoginDialog {
     email: new FormControl(''),
     password: new FormControl('')
   })
+
+  @ViewChild("password", {static : false}) passwordRef : ElementRef | undefined;
+
   constructor(private userService: UserService, private dRef: MatDialogRef<LoginDialog>, private store: Store<{ auth: any }>) { }
   //// function
   onLoginSubmit() {
@@ -49,6 +52,17 @@ export class LoginDialog {
   onOpenSignUpDialog() {
 
   }
+
+  onEyeDown(){
+    let htmlPasswordRef = <HTMLInputElement>this.passwordRef?.nativeElement;
+    htmlPasswordRef.type = 'text'
+  }
+
+  onEyeUp(){
+    let htmlPasswordRef = <HTMLInputElement>this.passwordRef?.nativeElement;
+    htmlPasswordRef.type = 'password'
+  }
+
 
   isEmptyItem(item: any) {
     return isEmpty(item)
