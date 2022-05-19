@@ -113,11 +113,11 @@
     <div class="table">
       <div class="table-items-container">
         <h5>{{t.name}}</h5>
-        <ng-container *ngIf="countUserSelected === 0 && isDone === false">
+        <ng-container *ngIf="hasUserSelected === false && isDone === false">
           <p>Pick up your cards</p>
         </ng-container>
 
-        <ng-container *ngIf="countUserSelected !== 0">
+        <ng-container *ngIf="hasUserSelected === true">
           <ng-container *ngIf="isDone === false">
 
             <ng-container *ngIf="tick === -1">

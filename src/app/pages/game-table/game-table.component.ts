@@ -25,6 +25,7 @@ import { ImportIssueAsCSVDialog } from 'src/app/shards/dialog/import-issue-as-cs
 import { getAuthSpectorMode } from 'src/app/store/selectors/users.selectors';
 import { UserService } from 'src/app/service/users.service';
 import { ImportIssueAsUrlsComponent } from 'src/app/shards/dialog/import-issue-as-urls/import-issue-as-urls.component';
+import { API_URL, HOST } from 'src/app/model/constants/constants';
 
 /* Game Table */
 @Component({
@@ -47,9 +48,8 @@ export class GameTableComponent implements OnInit {
   voting_sys_arr: string[] = ['1', '2', '3', '5', '8'];
   isSpectatorMode: boolean = false;
 
-  // another varibales
   selected?: string;
-  countUserSelected: number = 0;
+  hasUserSelected: boolean = false;
 
 
   stompClient: any;
@@ -76,8 +76,7 @@ export class GameTableComponent implements OnInit {
     private issueService: IssueService,
     private userService: UserService,
     private r: Router,
-    private store: Store<{ auth: any }>
-  ) {}
+    private store: Store<{ auth: any }>) {}
 
   ngOnInit(): void {
     // updating....
@@ -166,11 +165,11 @@ export class GameTableComponent implements OnInit {
   //// Socket function
   // --- connect
   _connect(user: UserResponse, tableId: string) {
-    let socket = new SockJS('http://localhost:8080/ws');
+    let socket = new SockJS(`${HOST}/ws`);
     this.stompClient = Stomp.over(socket);
     const _this = this;
     // connect
-    // _this.stompClient.debug = null; // remove or add this line in future
+    _this.stompClient.debug = null; // remove or add this line in future
 
     _this.stompClient.connect({}, function () {
       // subscribe
@@ -203,6 +202,9 @@ export class GameTableComponent implements OnInit {
       switch (c.messageType) {
         case 'JOIN':
           dataReceive = JSON.parse(c.content);
+
+          console.log(dataReceive)
+
           this.showDeckOnTable(dataReceive);
           let issue: Issue = dataReceive[0].gameTable.issueActive;
           if (issue) {
@@ -223,11 +225,11 @@ export class GameTableComponent implements OnInit {
           /// remove all space and split
           arr = c.content.replace(/ /g, '').split('-');
           (x = Number(arr[0])), (y = Number(arr[1])), (item = arr[2]);
-          // nếu gửi đến đúng table
+          this.hasUserSelected = this.onHasUserSelected()
+
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = item;
             this.game_play[x][y].isFlip = true;
-            this.countUserSelected += 1;
           }
           // this.game_play[]
           break;
@@ -235,10 +237,12 @@ export class GameTableComponent implements OnInit {
           /// remove all space and split
           arr = c.content.replace(/ /g, '').split('-');
           (x = Number(arr[0])), (y = Number(arr[1]));
+
+          this.hasUserSelected = this.onHasUserSelected()
+
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = undefined;
             this.game_play[x][y].isFlip = false;
-            this.countUserSelected -= 1;
           }
           break;
         case 'ACTIVE_SPECTATOR':
@@ -257,7 +261,7 @@ export class GameTableComponent implements OnInit {
           dataReceive = JSON.parse(c.content);
           this.isDone = true;
           this.onBuildResult(dataReceive);
-          if (c.storyPoint) {
+          if (c.storyPoint && c.issue) {
             let idx = this.issues_arr.findIndex((i) => i.id === c.issue);
             this.issues_arr[idx].storyPoint = c.storyPoint;
           }
@@ -269,6 +273,7 @@ export class GameTableComponent implements OnInit {
           });
           break;
         case 'START_NEW_VOTE':
+          this.hasUserSelected = false
           this.selected = undefined;
           var targets = (<HTMLElement>(
             this.HtmlElement.nativeElement
@@ -279,8 +284,6 @@ export class GameTableComponent implements OnInit {
 
           this.isDone = false;
           this.initTable();
-          break;
-
           break;
         case 'ADD_ISSUE':
           dataReceive = JSON.parse(c.content);
@@ -313,6 +316,19 @@ export class GameTableComponent implements OnInit {
     }
   }
   //// User function
+  onHasUserSelected(){
+    let hasUserSelected = false;
+    for (let i = 0; i < this.game_play.length; i++) {
+      for (let j = 0; j < this.game_play[i].length; j++) {
+        if (this.game_play[i][j].point !== undefined) {
+          hasUserSelected = true;
+        }
+      }
+    }
+    return hasUserSelected;    
+  }
+
+
   onActiveSpectatorMode(x: number, y: number) {
     if (this.game_play[x][y] !== undefined) {
       this.game_play[x][y].SpectatorMode = true;
@@ -358,6 +374,7 @@ export class GameTableComponent implements OnInit {
       deck.userOwner = dataReceive[i].user.id;
       deck.userOwnerName = dataReceive[i].user.displayName;
       deck.SpectatorMode = dataReceive[i].isSpectator;
+      deck.isGameEnd = dataReceive[i].gameTable.isGameEnd;
       if (dataReceive[i].item !== undefined) {
         deck.point = dataReceive[i].item.trim();
       }

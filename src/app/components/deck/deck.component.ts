@@ -13,6 +13,11 @@ export class DeckComponent implements OnInit, OnChanges {
   @Input() userOwner?: number
   @Input() SpectatorMode : boolean = false;
   @Input() userOwnerName? : string 
+  
+
+  /// isDone 
+  @Input() isGameEnd : boolean = false
+
 
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
