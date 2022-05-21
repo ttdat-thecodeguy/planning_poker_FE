@@ -81,7 +81,9 @@ export class GameTableComponent implements OnInit {
   ngOnInit(): void {
     // updating....
     this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id === null) this.r.navigate(['/404']);
+    if (this.id === null) {
+      this.r.navigate(['/404']);
+    }
     else {
       /// get token
       let data = localStorage.getItem('userLogin');
@@ -136,30 +138,30 @@ export class GameTableComponent implements OnInit {
           this.issues_arr = resp;
         });
         this.voting_sys_arr = this.t.voting.split(',');
-      });
-      //// mở dialog sau
-      if (isEmpty(this.$auth)) {
-        let dRef = this.dialog.open(SigninAsGuestDialog, {
-          disableClose: true,
-          data: this.id,
-        });
-        dRef.afterClosed().subscribe((res) => {
-          this.$auth = res.item;
-          /// trong trường hợp table chưa có owner ==> mới tạo
-          this.isSpectatorMode = res.item.spectorMode
-          
-          if (this.$auth && this.t.userOwerId === null) {
-            this.t.userOwerId = this.$auth.id;
-            // update owner of table in db
-            this.tableService
-              .updateOwner(this.id!, this.$auth.id)
-              .subscribe((resp) => (this.t = resp));
-          }
+
+        if (isEmpty(this.$auth)) {
+          let dRef = this.dialog.open(SigninAsGuestDialog, {
+            disableClose: true,
+            data: this.id,
+          });
+          dRef.afterClosed().subscribe((res) => {
+            this.$auth = res.item;
+            /// trong trường hợp table chưa có owner ==> mới tạo
+            this.isSpectatorMode = res.item.spectorMode
+            
+            if (this.$auth && this.t.userOwerId === null) {
+              this.t.userOwerId = this.$auth.id;
+              // update owner of table in db
+              this.tableService
+                .updateOwner(this.id!, this.$auth.id)
+                .subscribe((resp) => (this.t = resp));
+            }
+            this._connect(this.$auth!, this.id!);
+          });
+        } else {
           this._connect(this.$auth!, this.id!);
-        });
-      } else {
-        this._connect(this.$auth!, this.id!);
-      }
+        }
+      });
     }
   }
   //// Socket function
@@ -202,9 +204,6 @@ export class GameTableComponent implements OnInit {
       switch (c.messageType) {
         case 'JOIN':
           dataReceive = JSON.parse(c.content);
-
-          console.log(dataReceive)
-
           this.showDeckOnTable(dataReceive);
           let issue: Issue = dataReceive[0].gameTable.issueActive;
           if (issue) {
@@ -225,25 +224,21 @@ export class GameTableComponent implements OnInit {
           /// remove all space and split
           arr = c.content.replace(/ /g, '').split('-');
           (x = Number(arr[0])), (y = Number(arr[1])), (item = arr[2]);
-          this.hasUserSelected = this.onHasUserSelected()
-
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = item;
             this.game_play[x][y].isFlip = true;
           }
-          // this.game_play[]
+          this.hasUserSelected = this.onHasUserSelected()
           break;
         case 'UNSELECTED_CARD':
           /// remove all space and split
           arr = c.content.replace(/ /g, '').split('-');
           (x = Number(arr[0])), (y = Number(arr[1]));
-
-          this.hasUserSelected = this.onHasUserSelected()
-
           if (this.game_play[x][y] !== undefined) {
             this.game_play[x][y].point = undefined;
             this.game_play[x][y].isFlip = false;
           }
+          this.hasUserSelected = this.onHasUserSelected()
           break;
         case 'ACTIVE_SPECTATOR':
           /// remove all space and split
@@ -322,6 +317,7 @@ export class GameTableComponent implements OnInit {
       for (let j = 0; j < this.game_play[i].length; j++) {
         if (this.game_play[i][j].point !== undefined) {
           hasUserSelected = true;
+          break;
         }
       }
     }
